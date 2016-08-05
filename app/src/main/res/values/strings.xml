@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TechRace 2K16</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="scanner">Scanner</string>
+    <string name="locations">Locations</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+
+    <string name="action_help">Help</string>
+
+    <string name="scan_help">Tap the floating action button to open the scanner. Place the barcode anywhere in the viewfinder and it will be automatically scanned.</string>
+</resources>
