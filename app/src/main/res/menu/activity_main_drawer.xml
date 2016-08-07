@@ -7,6 +7,10 @@
             android:icon="@drawable/ic_center_focus_weak_white_24dp"
             android:title="@string/scanner" />
         <item
+            android:id="@+id/nav_clues"
+            android:icon="@drawable/ic_extension_white_24dp"
+            android:title="@string/clues" />
+        <item
             android:id="@+id/nav_locations"
             android:icon="@drawable/ic_beenhere_white_24dp"
             android:title="@string/locations" />

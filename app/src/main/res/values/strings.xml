@@ -4,6 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="scanner">Scanner</string>
+    <string name="clues">Clues</string>
     <string name="locations">Locations</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
@@ -11,4 +12,46 @@
     <string name="action_help">Help</string>
 
     <string name="scan_help">Tap the floating action button to open the scanner. Place the barcode anywhere in the viewfinder and it will be automatically scanned.</string>
+
+    <string name="app_desc">The official SPIT TechRace 2016 app</string>
+
+    <string name="credits">Team</string>
+    <string name="credits_desc">Meet the people behind SPIT TechRace 2016\n\n…</string>
+
+    <string name="licences">Licences</string>
+    <string name="licence_desc">Attribution notices for the libraries used</string>
+    <string name="view_notices">View notices</string>
+    <string name="support_lib">Android Support Library</string>
+    <string name="support_lib_desc">Copyright © 2011 The Android Open Source Project\n\n
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at\n\n
+        \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.</string>
+    <string name="scanner_lib">Material Barcode Scanner</string>
+    <string name="scanner_lib_desc">Copyright © 2016 Edward van Raak\n\n
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at\n\n
+        \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.</string>
+    <string name="butterknife">Butter Knife</string>
+    <string name="butterknife_desc">Copyright © 2013 Jake Wharton\n\n
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at\n\n
+        \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.</string>
 </resources>
