@@ -9,6 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/nav_header_height"
+        android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -19,7 +20,7 @@
             android:fitsSystemWindows="true"
             android:foreground="?android:attr/selectableItemBackground"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed" >
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -36,7 +37,7 @@
         android:id="@+id/fragment"
         android:name="thedorkknightrises.techraceapp.ScannerFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:layout="@layout/fragment_scanner" />
 

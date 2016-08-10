@@ -17,4 +17,8 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Dialog.Alert" />
 
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
 </resources>

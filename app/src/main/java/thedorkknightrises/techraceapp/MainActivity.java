@@ -1,6 +1,7 @@
 package thedorkknightrises.techraceapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
@@ -29,10 +30,20 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        
+
+        //  Initialize SharedPreferences
+        SharedPreferences pref = getSharedPreferences("Prefs", MODE_PRIVATE);
+        boolean locked = !pref.getBoolean("unlocked", false);
+        if (locked) {
+            //  Launch app intro
+            Intent i = new Intent(MainActivity.this, IntroActivity.class);
+            startActivity(i);
+        }
+
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
