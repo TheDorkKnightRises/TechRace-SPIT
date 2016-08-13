@@ -3,21 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="thedorkknightrises.techraceapp.HintActivity">
 
-    <eu.davidea.flipview.FlipView
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:id="@+id/flipView"
-        android:clickable="true"
-        app:enableInitialAnimation="true"
-        app:checked="true"
-        app:rearImageAnimation="@anim/grow_from_middle_x_axis"
-        app:rearImage="@drawable/ic_action_done"
-        app:frontImage="@drawable/ic_action_done" />
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gridView"
+        android:numColumns="3"
+        android:verticalSpacing="64dp"
+        android:gravity="center"
+        android:padding="16dp"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/hint_background"
+        android:layout_centerInParent="true"
+        android:visibility="invisible"
+        android:background="@color/trasparent_black"/>
 </RelativeLayout>
