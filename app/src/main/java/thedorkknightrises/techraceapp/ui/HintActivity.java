@@ -1,4 +1,4 @@
-package thedorkknightrises.techraceapp;
+package thedorkknightrises.techraceapp.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,7 @@ import com.mikelau.magictoast.MagicToast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flipview.FlipView;
+import thedorkknightrises.techraceapp.R;
 
 public class HintActivity extends Activity {
 

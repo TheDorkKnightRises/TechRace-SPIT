@@ -1,10 +1,12 @@
-package thedorkknightrises.techraceapp;
+package thedorkknightrises.techraceapp.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,15 +17,23 @@ import android.view.MenuItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import thedorkknightrises.techraceapp.R;
+import thedorkknightrises.techraceapp.locations.LocationFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.toolbar_collapse)
+    CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    int PAGE_SCANNER = 0;
+    int PAGE_CLUES = 1;
+    int PAGE_LOCATIONS = 2;
+    static int currentPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +42,18 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        //  Initialize SharedPreferences
-        SharedPreferences pref = getSharedPreferences("Prefs", MODE_PRIVATE);
-        boolean locked = !pref.getBoolean("unlocked", false);
-        if (locked) {
-            //  Launch app intro
-            Intent i = new Intent(MainActivity.this, IntroActivity.class);
-            startActivity(i);
+        if (savedInstanceState == null) {
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, ScannerFragment.newInstance()).commit();
+            currentPage = PAGE_SCANNER;
+            //  Initialize SharedPreferences
+            SharedPreferences pref = getSharedPreferences("Prefs", MODE_PRIVATE);
+            boolean locked = !pref.getBoolean("unlocked", false);
+            if (locked) {
+                //  Launch app intro
+                Intent i = new Intent(MainActivity.this, IntroActivity.class);
+                startActivity(i);
+            }
         }
 
         setSupportActionBar(toolbar);
@@ -62,7 +77,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        if (currentPage == PAGE_SCANNER)
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -73,12 +88,21 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_scanner) {
-            // Handle the camera action
-        } else if (id == R.id.nav_clues) {
-
-        } else if (id == R.id.nav_locations) {
-
+        if (id == R.id.nav_scanner && currentPage != PAGE_SCANNER) {
+            collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, ScannerFragment.newInstance()).commit();
+            currentPage = PAGE_SCANNER;
+        } else if (id == R.id.nav_clues && currentPage != PAGE_CLUES) {
+            collapsingToolbarLayout.setTitle(getString(R.string.clues));
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, ScannerFragment.newInstance()).commit();
+            currentPage = PAGE_CLUES;
+        } else if (id == R.id.nav_locations && currentPage != PAGE_LOCATIONS) {
+            collapsingToolbarLayout.setTitle(getString(R.string.locations));
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment, LocationFragment.newInstance(1)).commit();
+            currentPage = PAGE_LOCATIONS;
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(MainActivity.this, AboutActivity.class), ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
         } else if (id == R.id.nav_settings) {

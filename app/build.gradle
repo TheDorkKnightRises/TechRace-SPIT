@@ -27,6 +27,7 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.android.support:appcompat-v7:24.0.0'
     compile 'com.android.support:design:24.0.0'
     compile 'com.android.support:cardview-v7:24.0.0'
@@ -34,8 +35,8 @@ dependencies {
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.edwardvanraak:MaterialBarcodeScanner:0.0.6-ALPHA'
     compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
     compile 'com.heinrichreimersoftware:material-intro:1.5.7'
     compile 'com.github.ashnehete:FlipView:cd4f1cc44c'
     compile 'com.github.ekimual:magic-toast:0.0.2'
+    compile 'com.android.support:support-v4:24.0.0'
 }

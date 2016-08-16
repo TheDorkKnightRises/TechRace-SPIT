@@ -1,4 +1,4 @@
-package thedorkknightrises.techraceapp;
+package thedorkknightrises.techraceapp.ui;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.heinrichreimersoftware.materialintro.app.SlideFragment;
+
+import thedorkknightrises.techraceapp.R;
 
 /**
  * Created by Samriddha Basu on 8/10/2016.

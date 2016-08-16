@@ -1,4 +1,4 @@
-package thedorkknightrises.techraceapp;
+package thedorkknightrises.techraceapp.ui;
 
 import android.Manifest;
 import android.content.SharedPreferences;
@@ -9,6 +9,8 @@ import com.heinrichreimersoftware.materialintro.app.NavigationPolicy;
 import com.heinrichreimersoftware.materialintro.app.OnNavigationBlockedListener;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
+
+import thedorkknightrises.techraceapp.R;
 
 /**
  * Created by Samriddha Basu on 8/10/2016.

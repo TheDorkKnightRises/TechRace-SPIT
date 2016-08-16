@@ -1,4 +1,4 @@
-package thedorkknightrises.techraceapp;
+package thedorkknightrises.techraceapp.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,22 +28,18 @@ import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import thedorkknightrises.techraceapp.R;
+
 
 public class ScannerFragment extends Fragment {
     private FloatingActionButton fab;
-
-    private OnFragmentInteractionListener mListener;
 
     public ScannerFragment() {
         // Required empty public constructor
     }
 
-    public static ScannerFragment newInstance(String param1, String param2) {
-        ScannerFragment fragment = new ScannerFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
+    public static ScannerFragment newInstance() {
+        return new ScannerFragment();
     }
 
     @Override
@@ -62,14 +58,38 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().invalidateOptionsMenu();
 
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fab.setClickable(false);
                 enterReveal();
             }
         });
+        fab.setVisibility(View.VISIBLE);
+        fab.animate().scaleX(1).scaleY(1).setDuration(300).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+                fab.setClickable(false);
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                fab.setClickable(true);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+                fab.setClickable(true);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        }).start();
 
         CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_collapse);
         Toolbar toolbar = (Toolbar) collapsingToolbarLayout.findViewById(R.id.toolbar);
@@ -92,20 +112,20 @@ public class ScannerFragment extends Fragment {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_help) {
-            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getContext());
+            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
 
-            TextView head = new TextView(getContext());
+            TextView head = new TextView(getActivity());
             head.setText(R.string.action_help);
             head.setTextSize(24);
             head.setTextColor(Color.WHITE);
             head.setPadding(0, 0, 0, 16);
 
-            TextView textView = new TextView(getContext());
+            TextView textView = new TextView(getActivity());
             textView.setText(R.string.scan_help);
             textView.setTextSize(20);
             textView.setPadding(0, 0, 0, 16);
 
-            Button button = new Button(getContext());
+            Button button = new Button(getActivity());
             button.setText(R.string.scan_manual);
             button.setTextColor(getResources().getColor(R.color.colorAccent));
             button.setOnClickListener(new View.OnClickListener() {
@@ -113,15 +133,15 @@ public class ScannerFragment extends Fragment {
                 public void onClick(View view) {
                     bottomSheetDialog.dismiss();
 
-                    final BottomSheetDialog bottomSheet = new BottomSheetDialog(getContext());
+                    final BottomSheetDialog bottomSheet = new BottomSheetDialog(getActivity());
 
-                    TextView textView = new TextView(getContext());
+                    TextView textView = new TextView(getActivity());
                     textView.setText(R.string.manual_desc);
                     textView.setTextSize(20);
 
-                    final EditText codeText = new EditText(getContext());
+                    final EditText codeText = new EditText(getActivity());
 
-                    Button button = new Button(getContext());
+                    Button button = new Button(getActivity());
                     button.setText(R.string.action_confirm);
                     button.setTextColor(getResources().getColor(R.color.colorAccent));
                     button.setOnClickListener(new View.OnClickListener() {
@@ -133,7 +153,7 @@ public class ScannerFragment extends Fragment {
                         }
                     });
 
-                    LinearLayout linearLayout = new LinearLayout(getContext());
+                    LinearLayout linearLayout = new LinearLayout(getActivity());
                     linearLayout.setOrientation(LinearLayout.VERTICAL);
                     linearLayout.setBackgroundColor(Color.DKGRAY);
                     linearLayout.setPadding(48, 64, 48, 64);
@@ -148,7 +168,7 @@ public class ScannerFragment extends Fragment {
                 }
             });
 
-            LinearLayout linearLayout = new LinearLayout(getContext());
+            LinearLayout linearLayout = new LinearLayout(getActivity());
             linearLayout.setOrientation(LinearLayout.VERTICAL);
             linearLayout.setBackgroundColor(Color.DKGRAY);
             linearLayout.setPadding(48, 48, 48, 64);
@@ -163,22 +183,6 @@ public class ScannerFragment extends Fragment {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } /*else {
-            throw new RuntimeException(context.toString()+ " must implement OnFragmentInteractionListener");
-        }*/
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     private void startScan() {
@@ -199,7 +203,6 @@ public class ScannerFragment extends Fragment {
                 })
                 .build();
         materialBarcodeScanner.startScan();
-
     }
 
     void enterReveal() {
@@ -230,6 +233,7 @@ public class ScannerFragment extends Fragment {
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     myView.setVisibility(View.GONE);
+                    fab.setClickable(true);
                 }
             });
             anim.setDuration(500);
@@ -239,11 +243,11 @@ public class ScannerFragment extends Fragment {
 
     private void scanned(String code) {
         if (!code.equals("")) {
-            Toast.makeText(getContext(), code, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), code, Toast.LENGTH_SHORT).show();
             if (code.startsWith("http")) {
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(code));
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(i);
+                getActivity().startActivity(i);
             }
         }
     }
