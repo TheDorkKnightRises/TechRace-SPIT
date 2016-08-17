@@ -32,6 +32,9 @@
         <activity
             android:name=".ui.IntroActivity"
             android:theme="@style/Theme.Intro" />
+        <activity
+            android:name=".ui.DetailsActivity"
+            android:theme="@style/AppTheme.StatusbarOverlay" />
     </application>
 
 </manifest>

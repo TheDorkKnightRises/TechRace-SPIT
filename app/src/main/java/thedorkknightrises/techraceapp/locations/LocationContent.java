@@ -1,10 +1,7 @@
 package thedorkknightrises.techraceapp.locations;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LocationContent {
 
@@ -29,9 +26,9 @@ public class LocationContent {
                 "\t\t\t- Jeremy Clarkson"));
         ITEMS.add(new Location(5, "Hanging Gardens", "“And the secret garden bloomed and bloomed and every morning revealed new miracles.” \n" +
                 "\t\t\t- Frances Hodgson Burnett, The Secret Garden"));
-        ITEMS.add(new Location(6, "NCPA", "Description"));
-        ITEMS.add(new Location(7, "Gateway of India", "Description"));
-        ITEMS.add(new Location(8, "Zoo", "Description"));
+        ITEMS.add(new Location(6, "NCPA", "Location"));
+        ITEMS.add(new Location(7, "Gateway of India", "Location"));
+        ITEMS.add(new Location(8, "Zoo", "Location"));
         ITEMS.add(new Location(9, "SPIT", "\tBack where we started. Just like in 'The Alchemist'...how cliched. But then it IS true: \"...wherever your heart is, that is where you´ll find your treasure\"\nThis is the end of this treasure hunt. Or is it merely the beginning of the next?"));
     }
 

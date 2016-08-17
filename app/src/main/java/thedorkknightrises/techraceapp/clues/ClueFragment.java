@@ -62,7 +62,8 @@ public class ClueFragment extends Fragment {
             }
             SharedPreferences pref = getActivity().getSharedPreferences("Prefs", Context.MODE_PRIVATE);
             List<ClueContent.Clue> ITEMS = (pref.getInt("group", 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
-            recyclerView.setAdapter(new ClueAdapter(ITEMS));
+            ITEMS.remove(0);
+            recyclerView.setAdapter(new ClueAdapter(ITEMS, getActivity()));
         }
         return view;
     }
