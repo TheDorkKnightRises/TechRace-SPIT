@@ -51,6 +51,22 @@ public class CodeFragment extends SlideFragment {
                     edit.commit();
                     updateNavigation();
                     Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
+                } else if (passcode.getText().toString().equals("AAAAAAAA")) {
+                    unlocked = true;
+                    unlocked();
+                    edit.putBoolean("unlocked", true);
+                    edit.putInt("group", 1);
+                    edit.commit();
+                    updateNavigation();
+                    Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
+                } else if (passcode.getText().toString().equals("BBBBBBBB")) {
+                    unlocked = true;
+                    unlocked();
+                    edit.putBoolean("unlocked", true);
+                    edit.putInt("group", 2);
+                    edit.commit();
+                    updateNavigation();
+                    Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
                 } else {
                     passcode.setHintTextColor(Color.RED);
                     passcode.setHint("Incorrect Passcode");

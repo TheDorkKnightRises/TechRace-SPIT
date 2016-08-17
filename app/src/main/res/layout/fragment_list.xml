@@ -9,4 +9,4 @@
     android:clipToPadding="false"
     app:layoutManager="LinearLayoutManager"
     tools:context=".locations.LocationFragment"
-    tools:listitem="@layout/fragment_location" />
+    tools:listitem="@layout/fragment_list_item" />

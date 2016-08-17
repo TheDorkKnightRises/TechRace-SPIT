@@ -19,7 +19,9 @@
     <string name="action_help">Help</string>
     <string name="action_confirm">Confirm</string>
 
-    <string name="scan_help">Tap the floating action button to open the scanner. Place the barcode anywhere in the viewfinder and it will be automatically scanned. In case your camera fails to scan the code, you can use the button below.</string>
+    <string name="scan_help">Tap the floating action button to open the scanner.
+        Place the barcode anywhere in the viewfinder and it will be automatically scanned.
+        In case your camera fails to scan the code, try holding your device in landscape, or input code manually.</string>
     <string name="scan_manual">Tap here to input code manually</string>
     <string name="manual_desc">Input the numeric code below the barcode</string>
 

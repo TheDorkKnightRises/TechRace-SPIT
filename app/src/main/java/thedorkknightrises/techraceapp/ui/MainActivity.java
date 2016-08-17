@@ -1,12 +1,12 @@
 package thedorkknightrises.techraceapp.ui;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,10 +18,12 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import thedorkknightrises.techraceapp.R;
+import thedorkknightrises.techraceapp.clues.ClueFragment;
 import thedorkknightrises.techraceapp.locations.LocationFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    static int currentPage;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.toolbar_collapse)
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity
     int PAGE_SCANNER = 0;
     int PAGE_CLUES = 1;
     int PAGE_LOCATIONS = 2;
-    static int currentPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_clues && currentPage != PAGE_CLUES) {
             collapsingToolbarLayout.setTitle(getString(R.string.clues));
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment, ScannerFragment.newInstance()).commit();
+            ft.replace(R.id.fragment, ClueFragment.newInstance(1)).commit();
             currentPage = PAGE_CLUES;
         } else if (id == R.id.nav_locations && currentPage != PAGE_LOCATIONS) {
             collapsingToolbarLayout.setTitle(getString(R.string.locations));

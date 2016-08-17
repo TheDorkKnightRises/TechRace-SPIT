@@ -1,4 +1,4 @@
-package thedorkknightrises.techraceapp.locations;
+package thedorkknightrises.techraceapp.clues;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +10,11 @@ import java.util.List;
 
 import thedorkknightrises.techraceapp.R;
 
-public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
+public class ClueAdapter extends RecyclerView.Adapter<ClueAdapter.ViewHolder> {
 
-    private final List<LocationContent.Location> mValues;
+    private final List<ClueContent.Clue> mValues;
 
-    public LocationAdapter(List<LocationContent.Location> items) {
+    public ClueAdapter(List<ClueContent.Clue> items) {
         mValues = items;
     }
 
@@ -47,7 +47,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         public final View mView;
         public final TextView mDescView;
         public final TextView mNameView;
-        public LocationContent.Location mItem;
+        public ClueContent.Clue mItem;
 
         public ViewHolder(View view) {
             super(view);

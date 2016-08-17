@@ -34,12 +34,10 @@ import thedorkknightrises.techraceapp.R;
 
 
 public class ScannerFragment extends Fragment {
-    private FloatingActionButton fab;
-
     SharedPreferences pref;
     SharedPreferences.Editor edit;
-
     Button hintBtn;
+    private FloatingActionButton fab;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -279,29 +277,13 @@ public class ScannerFragment extends Fragment {
     }
 
     private void scanned(String code) {
-        if (!code.equals("")) {
-            Toast.makeText(getActivity(), code, Toast.LENGTH_SHORT).show();
-            if (code.startsWith("http")) {
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(code));
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getActivity().startActivity(i);
-            }
-        }
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        if (code.equals("12345678")) {
+            Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
+        } else if (code.startsWith("http")) {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(code));
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getActivity().startActivity(i);
+        } else Toast.makeText(getActivity(), "Invalid code!", Toast.LENGTH_SHORT).show();
     }
 
 }

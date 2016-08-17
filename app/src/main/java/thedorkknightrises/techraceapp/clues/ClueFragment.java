@@ -1,8 +1,9 @@
-package thedorkknightrises.techraceapp.locations;
+package thedorkknightrises.techraceapp.clues;
 
 import android.animation.Animator;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,21 +13,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import thedorkknightrises.techraceapp.R;
 
-public class LocationFragment extends Fragment {
+public class ClueFragment extends Fragment {
 
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public LocationFragment() {
+    public ClueFragment() {
     }
 
-    public static LocationFragment newInstance(int columnCount) {
-        LocationFragment fragment = new LocationFragment();
+    public static ClueFragment newInstance(int columnCount) {
+        ClueFragment fragment = new ClueFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -56,7 +60,9 @@ public class LocationFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new LocationAdapter(LocationContent.ITEMS));
+            SharedPreferences pref = getActivity().getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+            List<ClueContent.Clue> ITEMS = (pref.getInt("group", 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
+            recyclerView.setAdapter(new ClueAdapter(ITEMS));
         }
         return view;
     }
