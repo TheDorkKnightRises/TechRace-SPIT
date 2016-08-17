@@ -2,17 +2,23 @@ package thedorkknightrises.techraceapp.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
 import com.mikelau.magictoast.MagicToast;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,13 +30,20 @@ public class HintActivity extends Activity {
     final String TAG = "HintActivity";
     int flippedTile = -1;
     int matches = 0;
+    int[] icons = {
+            R.drawable.ic_account_circle_white_24dp,
+            R.drawable.ic_help_white_24dp,
+            R.drawable.ic_extension_white_24dp,
+            R.drawable.ic_center_focus_weak_white_24dp
+    };
+
+    SharedPreferences pref;
+    SharedPreferences.Editor edit;
 
     @BindView(R.id.gridView)
     GridView gridView;
     @BindView(R.id.hint_background)
     ImageView hintBackground;
-
-    FlipView[] tiles = new FlipView[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,48 +51,80 @@ public class HintActivity extends Activity {
         setContentView(R.layout.activity_hint);
         ButterKnife.bind(this);
 
-        setTiles();
+        pref = getSharedPreferences("Prefs", MODE_PRIVATE);
+        int hintsRemaining = pref.getInt("hints_remaining", -1);
+        edit = pref.edit();
+        edit.putInt("hints_remaining", hintsRemaining - 1);
+        edit.apply();
 
         Bundle extras = getIntent().getExtras();
+        int drawableHint = extras.getInt("hint_drawable", -1);
+        TileAdapter tileAdapter;
 
-        TileAdapter tileAdapter = new TileAdapter(this);
-        // TODO: use bundle to pass and recieve data
+        if (drawableHint == -1) tileAdapter = new TileAdapter(this);
+        else tileAdapter = new TileAdapter(this, getTiles(drawableHint));
+
         gridView.setAdapter(tileAdapter);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, i + " : " + view.toString());
-            }
-        });
     }
 
-    private void setTiles() {
-        for (int i = 0; i < 9; i++)
-            tiles[i] = new FlipView(this);
+    private List<Tile> getTiles(int drawableHint) {
+        Random random = new Random();
+
+        List<Tile> tiles = new ArrayList<>(9);
+        int hintPosition = random.nextInt(9);
+        tiles.add(new Tile(drawableHint, -1));
+
+        for (int i = 0; i < 4; i++) {
+            tiles.add(new Tile(icons[i], -1));
+            tiles.add(new Tile(icons[i], -1));
+        }
+        // Shuffle tiles
+        Collections.shuffle(tiles);
+
+        // Match positions of tiles
+        for (int i = 0; i < 9; i++) {
+            Tile t1 = tiles.get(i);
+            for (int j = 0; j < 9; j++) {
+                Tile t2 = tiles.get(j);
+                if (i != j && t1.getDrawable() == t2.getDrawable()) {
+                    t1.setMatchPosition(j);
+                    t2.setMatchPosition(i);
+                    tiles.set(i, t1);
+                    tiles.set(j, t2);
+                    break;
+                }
+            }
+        }
+
+        log(tiles);
+        return tiles;
+    }
+
+    private void log(List<Tile> tiles) {
+        String log = "";
+        for (int i = 0; i < tiles.size(); i++)
+            log += "\n" + tiles.get(i).toString();
+        Log.d(TAG, log);
     }
 
     class TileAdapter extends BaseAdapter {
 
         Context mContext;
-
-        /**
-         * | image resource of icon | position of match |
-         */
-        int[][] icons;
+        List<Tile> tiles;
 
         public TileAdapter(Context context) {
             mContext = context;
-            icons = new int[9][2];
-            // Setting default icons with consecutive matches
+            tiles = new ArrayList<>(9);
+            // Setting default tiles with consecutive matches
             for (int i = 0; i < 9; i++) {
-                icons[i][0] = R.drawable.ic_clear_white_24dp;
-                icons[i][1] = (i%2 == 0)? i+1 : i-1;
+                tiles.add(new Tile(R.drawable.ic_clear_white_24dp,
+                        (i%2 == 0)? i+1 : i-1));
             }
         }
 
-        public TileAdapter(Context context, int[][] icons) {
+        public TileAdapter(Context context, List<Tile> tiles) {
             this(context);
-            this.icons = icons;
+            this.tiles = tiles;
         }
 
         @Override
@@ -105,8 +150,8 @@ public class HintActivity extends Activity {
                 flipView.setLayoutParams(new GridView.LayoutParams(256, 256));
                 flipView.setPadding(8, 8, 8, 8);
                 flipView.setForegroundGravity(Gravity.CENTER);
-                flipView.setFrontImage(R.drawable.ic_action_done);
-                flipView.setRearImage(R.drawable.ic_clear_white_24dp);
+                flipView.setFrontImage(R.drawable.ic_hint_white_24dp);
+                flipView.setRearImage(tiles.get(i).getDrawable());
                 flipView.setClickable(true);
                 flipView.setOnClickListener(getOnClickListener(i, flipView));
             } else {
@@ -115,7 +160,7 @@ public class HintActivity extends Activity {
             return flipView;
         }
 
-        public View.OnClickListener getOnClickListener(final int i, final FlipView flipView) {
+        private View.OnClickListener getOnClickListener(final int i, final FlipView flipView) {
             return new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -125,7 +170,7 @@ public class HintActivity extends Activity {
                     Log.d(TAG, "FlippedTile: " + flippedTile);
                     if (flippedTile != -1) {
                         final FlipView flippedView = (FlipView) gridView.getChildAt(flippedTile);
-                        if (i == icons[flippedTile][1]) { // Tiles matched
+                        if (i == tiles.get(flippedTile).getMatchPosition()) { // Tiles matched
                             Log.d(TAG, "Icons match");
                             flippedView.setVisibility(View.INVISIBLE);
                             flipView.setVisibility(View.INVISIBLE);
@@ -141,8 +186,14 @@ public class HintActivity extends Activity {
                             }
                         } else { // Tiles don't match
                             Log.d(TAG, "Icons don't match");
-                            flipView.flip(false);
-                            flippedView.flip(false);
+                            new Handler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Reverse them
+                                    flipView.flip(false);
+                                    flippedView.flip(false);
+                                }
+                            }, 1000);
                             MagicToast.showError(getApplicationContext(), "No Match");
                         }
                         flippedTile = -1;
@@ -153,6 +204,37 @@ public class HintActivity extends Activity {
                     Log.d(TAG, "Position: " + i);
                 }
             };
+        }
+    }
+
+    class Tile {
+        private int matchPosition;
+        private int drawable;
+
+        public Tile(int drawable, int matchPosition) {
+            this.drawable = drawable;
+            this.matchPosition = matchPosition;
+        }
+
+        public int getDrawable() {
+            return drawable;
+        }
+
+        public void setDrawable(int drawable) {
+            this.drawable = drawable;
+        }
+
+        public int getMatchPosition() {
+            return matchPosition;
+        }
+
+        public void setMatchPosition(int matchPosition) {
+            this.matchPosition = matchPosition;
+        }
+
+        @Override
+        public String toString() {
+            return drawable + "\t" + matchPosition;
         }
     }
 }

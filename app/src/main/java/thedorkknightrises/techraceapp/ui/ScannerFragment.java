@@ -2,8 +2,9 @@ package thedorkknightrises.techraceapp.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
+import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -11,7 +12,6 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -28,11 +28,18 @@ import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
 
+import java.util.Locale;
+
 import thedorkknightrises.techraceapp.R;
 
 
 public class ScannerFragment extends Fragment {
     private FloatingActionButton fab;
+
+    SharedPreferences pref;
+    SharedPreferences.Editor edit;
+
+    Button hintBtn;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -52,7 +59,37 @@ public class ScannerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scanner, container, false);
+        View root = inflater.inflate(R.layout.fragment_scanner, container, false);
+
+        hintBtn = (Button) root.findViewById(R.id.hintBtn);
+
+        pref = getActivity().getSharedPreferences("Prefs", IntroActivity.MODE_PRIVATE);
+        edit = pref.edit();
+        int hintsRemaining = pref.getInt("hints_remaining", -1);
+
+        if (hintsRemaining == -1) {
+            hintsRemaining = 2;
+            edit.putInt("hints_remaining", hintsRemaining);
+            edit.apply();
+        }
+
+        hintBtn.setText(String.format(Locale.ENGLISH, "Hint (%d)", hintsRemaining));
+
+        if (hintsRemaining == 0) hintBtn.setEnabled(false);
+        else hintBtn.setOnClickListener(getOnClickListener(hintsRemaining));
+
+        return root;
+    }
+
+    private View.OnClickListener getOnClickListener(final int hintsRemaining) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), HintActivity.class);
+                intent.putExtra("hint_drawable", R.drawable.ic_clear_white_24dp);
+                startActivity(intent);
+            }
+        };
     }
 
     @Override
