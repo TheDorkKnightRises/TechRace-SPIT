@@ -1,5 +1,7 @@
 package thedorkknightrises.techraceapp.clues;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +11,17 @@ import android.widget.TextView;
 import java.util.List;
 
 import thedorkknightrises.techraceapp.R;
+import thedorkknightrises.techraceapp.locations.LocationContent;
+import thedorkknightrises.techraceapp.ui.DetailsActivity;
 
 public class ClueAdapter extends RecyclerView.Adapter<ClueAdapter.ViewHolder> {
 
     private final List<ClueContent.Clue> mValues;
+    private final Context context;
 
-    public ClueAdapter(List<ClueContent.Clue> items) {
+    public ClueAdapter(List<ClueContent.Clue> items, Context context) {
         mValues = items;
+        this.context = context;
     }
 
     @Override
@@ -34,6 +40,11 @@ public class ClueAdapter extends RecyclerView.Adapter<ClueAdapter.ViewHolder> {
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(context, DetailsActivity.class);
+                i.putExtra("clue", mValues.get(holder.getAdapterPosition()).details);
+                i.putExtra("location", LocationContent.ITEMS.get(holder.getAdapterPosition() + 1).name);
+                i.putExtra("location_desc", LocationContent.ITEMS.get(holder.getAdapterPosition() + 1).details);
+                context.startActivity(i);
             }
         });
     }

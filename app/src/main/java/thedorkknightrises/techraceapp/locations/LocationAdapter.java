@@ -1,5 +1,8 @@
 package thedorkknightrises.techraceapp.locations;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +12,17 @@ import android.widget.TextView;
 import java.util.List;
 
 import thedorkknightrises.techraceapp.R;
+import thedorkknightrises.techraceapp.clues.ClueContent;
+import thedorkknightrises.techraceapp.ui.DetailsActivity;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHolder> {
 
     private final List<LocationContent.Location> mValues;
+    private final Context context;
 
-    public LocationAdapter(List<LocationContent.Location> items) {
+    public LocationAdapter(List<LocationContent.Location> items, Context context) {
         mValues = items;
+        this.context = context;
     }
 
     @Override
@@ -30,10 +37,17 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         holder.mItem = mValues.get(position);
         holder.mDescView.setText(mValues.get(position).details);
         holder.mNameView.setText(mValues.get(position).name);
+        final SharedPreferences pref = context.getSharedPreferences("Prefs", Context.MODE_PRIVATE);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent i = new Intent(context, DetailsActivity.class);
+                i.putExtra("location", mValues.get(holder.getAdapterPosition()).name);
+                i.putExtra("location_desc", mValues.get(holder.getAdapterPosition()).details);
+                List<ClueContent.Clue> ITEMS = (pref.getInt("group", 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
+                i.putExtra("clue", ITEMS.get(holder.getAdapterPosition()).details);
+                context.startActivity(i);
             }
         });
     }
