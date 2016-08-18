@@ -8,19 +8,19 @@
 
 
     <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/gridView"
-        android:numColumns="3"
-        android:verticalSpacing="64dp"
         android:gravity="center"
-        android:padding="16dp"/>
+        android:numColumns="3"
+        android:padding="16dp"
+        android:verticalSpacing="64dp" />
 
     <ImageView
+        android:id="@+id/hint_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/hint_background"
         android:layout_centerInParent="true"
-        android:visibility="invisible"
-        android:background="@color/trasparent_black"/>
+        android:background="@color/transparent_black"
+        android:visibility="invisible" />
 </RelativeLayout>

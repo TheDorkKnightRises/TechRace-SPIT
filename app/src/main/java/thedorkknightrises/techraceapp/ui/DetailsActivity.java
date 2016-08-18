@@ -35,7 +35,7 @@ public class DetailsActivity extends AppCompatActivity {
         String clue = bundle.getString("clue");
         String location_text = bundle.getString("location_desc");
         collapsingToolbarLayout.setTitle(location);
-        if (clue.equals(""))
+        if (clue == null)
             findViewById(R.id.clue_card).setVisibility(View.GONE);
         else
             clue_desc.setText(clue);

@@ -12,7 +12,6 @@ public class ClueContent {
     public static final List<Clue> ITEMS_2 = new ArrayList<>();
 
     static {
-        ITEMS_1.add(new Clue(0, "Bhavan's Campus", ""));
         ITEMS_1.add(new Clue(1, "Andheri East Station", "A clue is what you seek.\n" +
                 "No one said it is easy.\n" +
                 "Did you really strive for it?\n" +
@@ -39,7 +38,6 @@ public class ClueContent {
         //TODO: Add clue
         ITEMS_1.add(new Clue(9, "SPIT", "Clue"));
 
-        ITEMS_2.add(new Clue(0, "Bhavan's Campus", ""));
         ITEMS_2.add(new Clue(1, "Andheri East Station", "Located on Salsette island, this place holds the next clue.\n" +
                 "Easily accessible through three different lines, isn't this clue out of the blue?"));
         ITEMS_2.add(new Clue(2, "Parle Factory", "Though my name means utterly unpleasant, now that I am shut, people reminisce my aroma!"));

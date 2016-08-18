@@ -46,7 +46,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
                 i.putExtra("location", mValues.get(holder.getAdapterPosition()).name);
                 i.putExtra("location_desc", mValues.get(holder.getAdapterPosition()).details);
                 List<ClueContent.Clue> ITEMS = (pref.getInt("group", 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
-                i.putExtra("clue", ITEMS.get(holder.getAdapterPosition()).details);
+                if ((holder.getAdapterPosition() - 1) != -1)
+                    i.putExtra("clue", ITEMS.get(holder.getAdapterPosition() - 1).details);
                 context.startActivity(i);
             }
         });

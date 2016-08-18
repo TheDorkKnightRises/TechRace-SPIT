@@ -34,8 +34,8 @@ public class ClueAdapter extends RecyclerView.Adapter<ClueAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mDescView.setText(mValues.get(position).details);
         holder.mNameView.setText(mValues.get(position).name);
+        holder.mDescView.setText(mValues.get(position).details);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
