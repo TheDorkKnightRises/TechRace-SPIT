@@ -6,21 +6,12 @@
     android:orientation="vertical"
     tools:context=".ui.HintActivity">
 
-
     <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
         android:numColumns="3"
-        android:padding="16dp"
-        android:verticalSpacing="64dp" />
-
-    <ImageView
-        android:id="@+id/hint_background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:background="@color/transparent_black"
-        android:visibility="invisible" />
+        android:verticalSpacing="48dp"
+        android:gravity="center"
+        android:padding="16dp"/>
 </RelativeLayout>

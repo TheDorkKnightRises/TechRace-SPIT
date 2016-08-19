@@ -73,6 +73,11 @@ public class ScannerFragment extends Fragment {
             edit.apply();
         }
 
+        if (hintsRemaining == 0) {
+            hintBtn.setEnabled(false);
+            hintBtn.setTextColor(Color.GRAY);
+        }
+
         hintBtn.setText(String.format(Locale.ENGLISH, "Hint (%d)", hintsRemaining));
 
         if (hintsRemaining == 0) hintBtn.setEnabled(false);
