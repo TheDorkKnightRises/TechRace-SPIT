@@ -10,6 +10,7 @@ import com.heinrichreimersoftware.materialintro.app.OnNavigationBlockedListener;
 import com.heinrichreimersoftware.materialintro.slide.FragmentSlide;
 import com.heinrichreimersoftware.materialintro.slide.SimpleSlide;
 
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
 /**
@@ -50,8 +51,8 @@ public class IntroActivity extends com.heinrichreimersoftware.materialintro.app.
             @Override
             public boolean canGoForward(int position) {
                 if (position == 1) {
-                    SharedPreferences pref = getSharedPreferences("Prefs", IntroActivity.MODE_PRIVATE);
-                    unlocked = pref.getBoolean("unlocked", false);
+                    SharedPreferences pref = getSharedPreferences(AppConstants.PREFS, IntroActivity.MODE_PRIVATE);
+                    unlocked = pref.getBoolean(AppConstants.PREFS_UNLOCKED, false);
                     return unlocked;
                 }
                 return true;

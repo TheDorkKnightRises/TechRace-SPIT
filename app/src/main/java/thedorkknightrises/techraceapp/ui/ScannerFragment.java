@@ -32,6 +32,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 import java.util.Locale;
 
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
 
@@ -63,13 +64,13 @@ public class ScannerFragment extends Fragment {
 
         hintBtn = (Button) root.findViewById(R.id.hintBtn);
 
-        pref = getActivity().getSharedPreferences("Prefs", IntroActivity.MODE_PRIVATE);
+        pref = getActivity().getSharedPreferences(AppConstants.PREFS, IntroActivity.MODE_PRIVATE);
         edit = pref.edit();
-        int hintsRemaining = pref.getInt("hints_remaining", -1);
+        int hintsRemaining = pref.getInt(AppConstants.PREFS_HINTS, -1);
 
         if (hintsRemaining == -1) {
             hintsRemaining = 2;
-            edit.putInt("hints_remaining", hintsRemaining);
+            edit.putInt(AppConstants.PREFS_HINTS, hintsRemaining);
             edit.apply();
         }
 
@@ -91,7 +92,7 @@ public class ScannerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), HintActivity.class);
-                intent.putExtra("hint_drawable", R.drawable.ic_clear_white_24dp);
+                // intent.putExtra("hint_drawable", R.drawable.ic_clear_white_24dp);
                 startActivity(intent);
             }
         };

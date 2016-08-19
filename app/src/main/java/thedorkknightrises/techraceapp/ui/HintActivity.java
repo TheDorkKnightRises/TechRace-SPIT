@@ -29,6 +29,7 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flipview.FlipView;
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
 public class HintActivity extends AppCompatActivity {
@@ -58,19 +59,13 @@ public class HintActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hint);
         ButterKnife.bind(this);
 
-        pref = getSharedPreferences("Prefs", MODE_PRIVATE);
-        int hintsRemaining = pref.getInt("hints_remaining", -1);
+        pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
+        int hintsRemaining = pref.getInt(AppConstants.PREFS_HINTS, -1);
         edit = pref.edit();
-        edit.putInt("hints_remaining", hintsRemaining - 1);
+        edit.putInt(AppConstants.PREFS_HINTS, hintsRemaining - 1);
         edit.apply();
 
-        Bundle extras = getIntent().getExtras();
-        int drawableHint = extras.getInt("hint_drawable", -1);
-        TileAdapter tileAdapter;
-
-        if (drawableHint == -1) tileAdapter = new TileAdapter(this);
-        else tileAdapter = new TileAdapter(this, getTiles());
-
+        TileAdapter tileAdapter = new TileAdapter(this, getTiles());
         gridView.setAdapter(tileAdapter);
     }
 
@@ -178,18 +173,8 @@ public class HintActivity extends AppCompatActivity {
         Context mContext;
         List<Tile> tiles;
 
-        public TileAdapter(Context context) {
-            mContext = context;
-            tiles = new ArrayList<>(12);
-            // Setting default tiles with consecutive matches
-            for (int i = 0; i < 12; i++) {
-                tiles.add(new Tile(R.drawable.ic_clear_white_24dp,
-                        (i%2 == 0)? i+1 : i-1));
-            }
-        }
-
         public TileAdapter(Context context, List<Tile> tiles) {
-            this(context);
+            mContext = context;
             this.tiles = tiles;
         }
 
