@@ -3,6 +3,8 @@ package thedorkknightrises.techraceapp.ui;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Fragment;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -10,8 +12,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -126,8 +128,7 @@ public class ScannerFragment extends Fragment {
             }
         }).start();
 
-        CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) getActivity().findViewById(R.id.toolbar_collapse);
-        Toolbar toolbar = (Toolbar) collapsingToolbarLayout.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.inflateMenu(R.menu.main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -279,6 +280,18 @@ public class ScannerFragment extends Fragment {
     private void scanned(String code) {
         if (code.equals("12345678")) {
             Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
+
+            NotificationCompat.Builder mBuilder =
+                    new NotificationCompat.Builder(getActivity())
+                            .setSmallIcon(R.drawable.logo)
+                            .setContentTitle("New location unlocked!")
+                            .setContentText("Tap to see details")
+                            .setAutoCancel(true);
+            //TODO: Add pending intent to open details page
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+            mNotificationManager.notify(0, mBuilder.build());
+
         } else if (code.startsWith("http")) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(code));
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

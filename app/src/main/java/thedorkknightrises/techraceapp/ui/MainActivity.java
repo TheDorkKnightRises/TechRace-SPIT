@@ -4,7 +4,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
@@ -26,8 +25,6 @@ public class MainActivity extends AppCompatActivity
     static int currentPage;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.toolbar_collapse)
-    CollapsingToolbarLayout collapsingToolbarLayout;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
@@ -90,17 +87,17 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_scanner && currentPage != PAGE_SCANNER) {
-            collapsingToolbarLayout.setTitle(getString(R.string.app_name));
+            toolbar.setTitle(getString(R.string.app_name));
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, ScannerFragment.newInstance()).commit();
             currentPage = PAGE_SCANNER;
         } else if (id == R.id.nav_clues && currentPage != PAGE_CLUES) {
-            collapsingToolbarLayout.setTitle(getString(R.string.clues));
+            toolbar.setTitle(getString(R.string.clues));
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, ClueFragment.newInstance(1)).commit();
             currentPage = PAGE_CLUES;
         } else if (id == R.id.nav_locations && currentPage != PAGE_LOCATIONS) {
-            collapsingToolbarLayout.setTitle(getString(R.string.locations));
+            toolbar.setTitle(getString(R.string.locations));
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, LocationFragment.newInstance(1)).commit();
             currentPage = PAGE_LOCATIONS;

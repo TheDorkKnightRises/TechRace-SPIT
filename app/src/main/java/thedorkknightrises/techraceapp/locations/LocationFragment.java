@@ -56,7 +56,7 @@ public class LocationFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new LocationAdapter(LocationContent.ITEMS));
+            recyclerView.setAdapter(new LocationAdapter(LocationContent.ITEMS, getActivity()));
         }
         return view;
     }
