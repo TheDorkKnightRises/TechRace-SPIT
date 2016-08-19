@@ -21,7 +21,7 @@
             android:id="@+id/location_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_margin"
+            android:layout_marginTop="8dp"
             tools:text="DESCRIPTION"/>
     </LinearLayout>
 </android.support.v7.widget.CardView>
