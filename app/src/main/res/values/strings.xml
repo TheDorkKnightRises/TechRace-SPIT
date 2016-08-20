@@ -28,6 +28,9 @@
     <string name="credits">Team</string>
     <string name="credits_desc">Meet the people behind SPIT TechRace 2016\n\n…</string>
 
+    <string name="hints_desc">Match the tiles with the same icons by clicking on the circles. Tiles
+    disappear when they match. Complete this challenge and an additional clue will present itself.</string>
+
     <string name="licences">Licences</string>
     <string name="licence_desc">Attribution notices for the libraries used</string>
     <string name="view_notices">View notices</string>

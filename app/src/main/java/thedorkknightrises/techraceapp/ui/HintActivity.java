@@ -1,17 +1,23 @@
 package thedorkknightrises.techraceapp.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mikelau.magictoast.MagicToast;
 
@@ -23,18 +29,22 @@ import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.davidea.flipview.FlipView;
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
-public class HintActivity extends Activity {
+public class HintActivity extends AppCompatActivity {
 
     final String TAG = "HintActivity";
     int flippedTile = -1;
     int matches = 0;
+    boolean backPressFlag = false;
     int[] icons = {
             R.drawable.ic_account_circle_white_24dp,
             R.drawable.ic_help_white_24dp,
             R.drawable.ic_extension_white_24dp,
-            R.drawable.ic_center_focus_weak_white_24dp
+            R.drawable.ic_center_focus_weak_white_24dp,
+            R.drawable.ic_info_white_24dp,
+            R.drawable.ic_settings_white_24dp
     };
 
     SharedPreferences pref;
@@ -42,8 +52,6 @@ public class HintActivity extends Activity {
 
     @BindView(R.id.gridView)
     GridView gridView;
-    @BindView(R.id.hint_background)
-    ImageView hintBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,40 +59,93 @@ public class HintActivity extends Activity {
         setContentView(R.layout.activity_hint);
         ButterKnife.bind(this);
 
-        pref = getSharedPreferences("Prefs", MODE_PRIVATE);
-        int hintsRemaining = pref.getInt("hints_remaining", -1);
+        pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
+        int hintsRemaining = pref.getInt(AppConstants.PREFS_HINTS, -1);
         edit = pref.edit();
-        edit.putInt("hints_remaining", hintsRemaining - 1);
+        edit.putInt(AppConstants.PREFS_HINTS, hintsRemaining - 1);
         edit.apply();
 
-        Bundle extras = getIntent().getExtras();
-        int drawableHint = extras.getInt("hint_drawable", -1);
-        TileAdapter tileAdapter;
-
-        if (drawableHint == -1) tileAdapter = new TileAdapter(this);
-        else tileAdapter = new TileAdapter(this, getTiles(drawableHint));
-
+        TileAdapter tileAdapter = new TileAdapter(this, getTiles());
         gridView.setAdapter(tileAdapter);
     }
 
-    private List<Tile> getTiles(int drawableHint) {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_help:
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
+
+                TextView head = new TextView(this);
+                head.setText(R.string.action_help);
+                head.setTextSize(24);
+                head.setTextColor(Color.WHITE);
+                head.setPadding(0, 0, 0, 16);
+
+                TextView content = new TextView(this);
+                content.setText(R.string.hints_desc);
+                content.setTextSize(20);
+
+                LinearLayout linearLayout = new LinearLayout(this);
+                linearLayout.setOrientation(LinearLayout.VERTICAL);
+                linearLayout.setBackgroundColor(Color.DKGRAY);
+                linearLayout.setPadding(48, 48, 48, 64);
+                linearLayout.addView(head);
+                linearLayout.addView(content);
+
+                bottomSheetDialog.setTitle(R.string.action_help);
+                bottomSheetDialog.setContentView(linearLayout);
+                bottomSheetDialog.setCanceledOnTouchOutside(true);
+                bottomSheetDialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!backPressFlag) {
+            Toast.makeText(getApplicationContext(), "You lose a hint if you go back now",
+                    Toast.LENGTH_SHORT).show();
+            backPressFlag = true;
+
+            // Thread to change backPressedFlag to false after 3000ms
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        backPressFlag = false;
+                    }
+                }
+            }).start();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    private List<Tile> getTiles() {
         Random random = new Random();
 
-        List<Tile> tiles = new ArrayList<>(9);
-        int hintPosition = random.nextInt(9);
-        tiles.add(new Tile(drawableHint, -1));
+        List<Tile> tiles = new ArrayList<>(12);
 
-        for (int i = 0; i < 4; i++) {
-            tiles.add(new Tile(icons[i], -1));
-            tiles.add(new Tile(icons[i], -1));
+        for (int i = 0; i < 12; i++) {
+            tiles.add(new Tile(icons[i%6], -1));
         }
         // Shuffle tiles
         Collections.shuffle(tiles);
 
         // Match positions of tiles
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             Tile t1 = tiles.get(i);
-            for (int j = 0; j < 9; j++) {
+            for (int j = 0; j < 12; j++) {
                 Tile t2 = tiles.get(j);
                 if (i != j && t1.getDrawable() == t2.getDrawable()) {
                     t1.setMatchPosition(j);
@@ -112,24 +173,14 @@ public class HintActivity extends Activity {
         Context mContext;
         List<Tile> tiles;
 
-        public TileAdapter(Context context) {
-            mContext = context;
-            tiles = new ArrayList<>(9);
-            // Setting default tiles with consecutive matches
-            for (int i = 0; i < 9; i++) {
-                tiles.add(new Tile(R.drawable.ic_clear_white_24dp,
-                        (i%2 == 0)? i+1 : i-1));
-            }
-        }
-
         public TileAdapter(Context context, List<Tile> tiles) {
-            this(context);
+            mContext = context;
             this.tiles = tiles;
         }
 
         @Override
         public int getCount() {
-            return 9;
+            return 12;
         }
 
         @Override
@@ -150,7 +201,6 @@ public class HintActivity extends Activity {
                 flipView.setLayoutParams(new GridView.LayoutParams(256, 256));
                 flipView.setPadding(8, 8, 8, 8);
                 flipView.setForegroundGravity(Gravity.CENTER);
-                flipView.setFrontImage(R.drawable.ic_hint_white_24dp);
                 flipView.setRearImage(tiles.get(i).getDrawable());
                 flipView.setClickable(true);
                 flipView.setOnClickListener(getOnClickListener(i, flipView));
@@ -178,11 +228,10 @@ public class HintActivity extends Activity {
                             matches++;
 
                             // All matched but one
-                            if (matches == 4) {
-                                Log.d(TAG, "All matched but one");
-                                hintBackground.setVisibility(View.VISIBLE);
-
-                                // TODO: Show the icon
+                            if (matches == 6) {
+                                Log.d(TAG, "All matched");
+                                // TODO: Show the next clue
+                                Toast.makeText(getApplicationContext(), "Show Clue", Toast.LENGTH_SHORT).show();
                             }
                         } else { // Tiles don't match
                             Log.d(TAG, "Icons don't match");

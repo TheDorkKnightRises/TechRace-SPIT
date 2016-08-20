@@ -28,7 +28,10 @@
             android:name=".ui.LicenseActivity"
             android:label="@string/licences"
             android:theme="@style/AppTheme" />
-        <activity android:name=".ui.HintActivity" />
+        <activity
+            android:name=".ui.HintActivity"
+            android:label="Hint"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".ui.IntroActivity"
             android:theme="@style/Theme.Intro" />

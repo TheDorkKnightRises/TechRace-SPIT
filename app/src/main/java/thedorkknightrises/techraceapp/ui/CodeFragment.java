@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.heinrichreimersoftware.materialintro.app.SlideFragment;
 
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
 /**
@@ -36,34 +37,35 @@ public class CodeFragment extends SlideFragment {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.intro_code, container, false);
 
-        SharedPreferences pref = getActivity().getSharedPreferences("Prefs", IntroActivity.MODE_PRIVATE);
+        SharedPreferences pref = getActivity().getSharedPreferences(AppConstants.PREFS,
+                IntroActivity.MODE_PRIVATE);
         final SharedPreferences.Editor edit = pref.edit();
         passcode = (EditText) root.findViewById(R.id.code);
         button = (Button) root.findViewById(R.id.codeBtn);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (passcode.getText().toString().equals("UB3RH4XX0R")) {
+                if (passcode.getText().toString().equals(AppConstants.PASSCODE1)) {
                     unlocked = true;
                     unlocked();
-                    edit.putBoolean("unlocked", true);
-                    edit.putInt("group", 0);
+                    edit.putBoolean(AppConstants.PREFS_UNLOCKED, true);
+                    edit.putInt(AppConstants.PREFS_GROUP, AppConstants.GROUP1);
                     edit.commit();
                     updateNavigation();
                     Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
-                } else if (passcode.getText().toString().equals("AAAAAAAA")) {
+                } else if (passcode.getText().toString().equals(AppConstants.PASSCODE2)) {
                     unlocked = true;
                     unlocked();
-                    edit.putBoolean("unlocked", true);
-                    edit.putInt("group", 1);
+                    edit.putBoolean(AppConstants.PREFS_UNLOCKED, true);
+                    edit.putInt(AppConstants.PREFS_GROUP, AppConstants.GROUP2);
                     edit.commit();
                     updateNavigation();
                     Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
-                } else if (passcode.getText().toString().equals("BBBBBBBB")) {
+                } else if (passcode.getText().toString().equals(AppConstants.PASSCODE3)) {
                     unlocked = true;
                     unlocked();
-                    edit.putBoolean("unlocked", true);
-                    edit.putInt("group", 2);
+                    edit.putBoolean(AppConstants.PREFS_UNLOCKED, true);
+                    edit.putInt(AppConstants.PREFS_GROUP, AppConstants.GROUP3);
                     edit.commit();
                     updateNavigation();
                     Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
