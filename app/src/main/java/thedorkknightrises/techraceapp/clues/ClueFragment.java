@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
 public class ClueFragment extends Fragment {
@@ -60,8 +61,8 @@ public class ClueFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            SharedPreferences pref = getActivity().getSharedPreferences("Prefs", Context.MODE_PRIVATE);
-            List<ClueContent.Clue> ITEMS = (pref.getInt("group", 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
+            SharedPreferences pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
+            List<ClueContent.Clue> ITEMS = (pref.getInt(AppConstants.PREFS_GROUP, 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
             recyclerView.setAdapter(new ClueAdapter(ITEMS, getActivity()));
         }
         return view;

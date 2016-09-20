@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -18,8 +20,6 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.mikelau.magictoast.MagicToast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +52,8 @@ public class HintActivity extends AppCompatActivity {
 
     @BindView(R.id.gridView)
     GridView gridView;
+    @BindView(R.id.hintRootView)
+    CoordinatorLayout rootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,9 +224,21 @@ public class HintActivity extends AppCompatActivity {
                         final FlipView flippedView = (FlipView) gridView.getChildAt(flippedTile);
                         if (i == tiles.get(flippedTile).getMatchPosition()) { // Tiles matched
                             Log.d(TAG, "Icons match");
-                            flippedView.setVisibility(View.INVISIBLE);
-                            flipView.setVisibility(View.INVISIBLE);
-                            MagicToast.showSuccess(getApplicationContext(), "Match");
+                            flippedView.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    flippedView.setVisibility(View.GONE);
+                                }
+                            }).start();
+                            flipView.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    flipView.setVisibility(View.GONE);
+                                }
+                            }).start();
+                            Snackbar snackbar = Snackbar.make(rootView, "Match", Snackbar.LENGTH_SHORT);
+                            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.successGreen));
+                            snackbar.show();
                             matches++;
 
                             // All matched but one
@@ -232,6 +246,11 @@ public class HintActivity extends AppCompatActivity {
                                 Log.d(TAG, "All matched");
                                 // TODO: Show the next clue
                                 Toast.makeText(getApplicationContext(), "Show Clue", Toast.LENGTH_SHORT).show();
+                                pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
+                                edit = pref.edit();
+                                edit.putBoolean(AppConstants.PREFS_BONUS, true);
+                                edit.apply();
+                                finish();
                             }
                         } else { // Tiles don't match
                             Log.d(TAG, "Icons don't match");
@@ -243,7 +262,9 @@ public class HintActivity extends AppCompatActivity {
                                     flippedView.flip(false);
                                 }
                             }, 1000);
-                            MagicToast.showError(getApplicationContext(), "No Match");
+                            Snackbar snackbar = Snackbar.make(rootView, "No Match", Snackbar.LENGTH_SHORT);
+                            snackbar.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                            snackbar.show();
                         }
                         flippedTile = -1;
                     } else {

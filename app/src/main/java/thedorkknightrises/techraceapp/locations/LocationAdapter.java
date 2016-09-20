@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 import thedorkknightrises.techraceapp.clues.ClueContent;
 import thedorkknightrises.techraceapp.ui.DetailsActivity;
@@ -37,7 +38,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         holder.mItem = mValues.get(position);
         holder.mDescView.setText(mValues.get(position).details);
         holder.mNameView.setText(mValues.get(position).name);
-        final SharedPreferences pref = context.getSharedPreferences("Prefs", Context.MODE_PRIVATE);
+        final SharedPreferences pref = context.getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +46,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
                 Intent i = new Intent(context, DetailsActivity.class);
                 i.putExtra("location", mValues.get(holder.getAdapterPosition()).name);
                 i.putExtra("location_desc", mValues.get(holder.getAdapterPosition()).details);
-                List<ClueContent.Clue> ITEMS = (pref.getInt("group", 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
+                List<ClueContent.Clue> ITEMS = (pref.getInt(AppConstants.PREFS_GROUP, 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
                 if ((holder.getAdapterPosition() - 1) != -1)
                     i.putExtra("clue", ITEMS.get(holder.getAdapterPosition() - 1).details);
                 context.startActivity(i);

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -37,9 +38,11 @@ import thedorkknightrises.techraceapp.R;
 
 
 public class ScannerFragment extends Fragment {
-    SharedPreferences pref;
     SharedPreferences.Editor edit;
     Button hintBtn;
+    CardView bonus;
+    SharedPreferences pref;
+    View root;
     private FloatingActionButton fab;
 
     public ScannerFragment() {
@@ -60,8 +63,14 @@ public class ScannerFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_scanner, container, false);
+        root = inflater.inflate(R.layout.fragment_scanner, container, false);
 
+        setupHintsButton();
+
+        return root;
+    }
+
+    private void setupHintsButton() {
         hintBtn = (Button) root.findViewById(R.id.hintBtn);
 
         pref = getActivity().getSharedPreferences(AppConstants.PREFS, IntroActivity.MODE_PRIVATE);
@@ -83,8 +92,6 @@ public class ScannerFragment extends Fragment {
 
         if (hintsRemaining == 0) hintBtn.setEnabled(false);
         else hintBtn.setOnClickListener(getOnClickListener(hintsRemaining));
-
-        return root;
     }
 
     private View.OnClickListener getOnClickListener(final int hintsRemaining) {
@@ -96,6 +103,14 @@ public class ScannerFragment extends Fragment {
                 startActivity(intent);
             }
         };
+    }
+
+    private void setupBonusHint() {
+        bonus = (CardView) root.findViewById(R.id.bonusCard);
+        pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
+        if (pref.getBoolean(AppConstants.PREFS_BONUS, false)) {
+            bonus.setVisibility(View.VISIBLE);
+        } else bonus.setVisibility(View.GONE);
     }
 
     @Override
@@ -143,7 +158,16 @@ public class ScannerFragment extends Fragment {
                 return true;
             }
         });
+
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupHintsButton();
+        setupBonusHint();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -297,6 +321,13 @@ public class ScannerFragment extends Fragment {
             NotificationManager mNotificationManager =
                     (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(0, mBuilder.build());
+
+            pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
+            edit = pref.edit();
+            edit.putBoolean(AppConstants.PREFS_BONUS, false);
+            edit.apply();
+
+            setupBonusHint();
 
         } else if (code.startsWith("http")) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(code));

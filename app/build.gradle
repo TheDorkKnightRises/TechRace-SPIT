@@ -37,6 +37,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.2.1'
     compile 'com.heinrichreimersoftware:material-intro:1.5.7'
     compile 'com.github.ashnehete:FlipView:cd4f1cc44c'
-    compile 'com.github.ekimual:magic-toast:0.0.2'
     compile 'com.android.support:support-v4:24.0.0'
 }
