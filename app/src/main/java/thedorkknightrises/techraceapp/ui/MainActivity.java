@@ -37,13 +37,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        //  Initialize SharedPreferences
+        SharedPreferences pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
 
         if (savedInstanceState == null) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, ScannerFragment.newInstance()).commit();
             currentPage = AppConstants.PAGE_SCANNER;
-            //  Initialize SharedPreferences
-            SharedPreferences pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
             boolean locked = !pref.getBoolean(AppConstants.PREFS_UNLOCKED, false);
             if (locked) {
                 //  Launch app intro

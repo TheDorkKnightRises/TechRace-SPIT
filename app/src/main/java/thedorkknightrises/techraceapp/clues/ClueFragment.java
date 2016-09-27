@@ -62,7 +62,7 @@ public class ClueFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             SharedPreferences pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
-            List<ClueContent.Clue> ITEMS = (pref.getInt(AppConstants.PREFS_GROUP, 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;
+            List<ClueContent.Clue> ITEMS = ((pref.getInt(AppConstants.PREFS_GROUP, 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1).subList(0, pref.getInt(AppConstants.PREFS_LEVEL, 0));
             recyclerView.setAdapter(new ClueAdapter(ITEMS, getActivity()));
         }
         return view;

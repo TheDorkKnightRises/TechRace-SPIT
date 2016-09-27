@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Fragment;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,6 +36,8 @@ import java.util.Locale;
 
 import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
+import thedorkknightrises.techraceapp.clues.ClueContent;
+import thedorkknightrises.techraceapp.locations.LocationContent;
 
 
 public class ScannerFragment extends Fragment {
@@ -166,6 +169,19 @@ public class ScannerFragment extends Fragment {
         super.onResume();
         setupHintsButton();
         setupBonusHint();
+
+        TextView clueText = (TextView) root.findViewById(R.id.clueText);
+        TextView bonusClueText = (TextView) root.findViewById(R.id.bonusClueText);
+
+        int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
+
+        if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+            clueText.setText(ClueContent.ITEMS_1.get(level).details);
+        else clueText.setText(ClueContent.ITEMS_2.get(level).details);
+
+        if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+            bonusClueText.setText(ClueContent.ITEMS_2.get(level).details);
+        else bonusClueText.setText(ClueContent.ITEMS_1.get(level).details);
     }
 
 
@@ -310,6 +326,14 @@ public class ScannerFragment extends Fragment {
     private void scanned(String code) {
         if (code.equals("12345678")) {
             Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
+            pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
+            int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
+            level++;
+            edit = pref.edit();
+            edit.putBoolean(AppConstants.PREFS_BONUS, false);
+            edit.putInt(AppConstants.PREFS_LEVEL, level);
+            edit.apply();
+            onResume();
 
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(getActivity())
@@ -317,17 +341,24 @@ public class ScannerFragment extends Fragment {
                             .setContentTitle("New location unlocked!")
                             .setContentText("Tap to see details")
                             .setAutoCancel(true);
-            //TODO: Add pending intent to open details page
+
+            Intent resultIntent = new Intent(getActivity(), DetailsActivity.class);
+            resultIntent.putExtra("location", LocationContent.ITEMS.get(level).name);
+            resultIntent.putExtra("location_desc", LocationContent.ITEMS.get(level).details);
+
+            PendingIntent resultPendingIntent =
+                    PendingIntent.getActivity(
+                            getActivity(),
+                            0,
+                            resultIntent,
+                            PendingIntent.FLAG_UPDATE_CURRENT
+                    );
+
+            mBuilder.setContentIntent(resultPendingIntent);
+
             NotificationManager mNotificationManager =
                     (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.notify(0, mBuilder.build());
-
-            pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
-            edit = pref.edit();
-            edit.putBoolean(AppConstants.PREFS_BONUS, false);
-            edit.apply();
-
-            setupBonusHint();
 
         } else if (code.startsWith("http")) {
             Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(code));

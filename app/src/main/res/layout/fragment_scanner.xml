@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="96dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ui.MainActivity">
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="96dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,6 +32,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/clueTitle"
                         style="@style/TextAppearance.AppCompat.Large"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -38,6 +40,7 @@
                         android:text="Clue" />
 
                     <TextView
+                        android:id="@+id/clueText"
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -71,6 +74,7 @@
                     android:padding="16dp">
 
                     <TextView
+                        android:id="@+id/bonusClueTitle"
                         style="@style/TextAppearance.AppCompat.Large"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -78,6 +82,7 @@
                         android:text="Bonus Clue" />
 
                     <TextView
+                        android:id="@+id/bonusClueText"
                         style="@style/TextAppearance.AppCompat.Medium"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -244,8 +244,6 @@ public class HintActivity extends AppCompatActivity {
                             // All matched but one
                             if (matches == 6) {
                                 Log.d(TAG, "All matched");
-                                // TODO: Show the next clue
-                                Toast.makeText(getApplicationContext(), "Show Clue", Toast.LENGTH_SHORT).show();
                                 pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
                                 edit = pref.edit();
                                 edit.putBoolean(AppConstants.PREFS_BONUS, true);

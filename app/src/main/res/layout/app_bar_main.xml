@@ -35,6 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_center_focus_weak_white_24dp" />
+        android:src="@drawable/ic_center_focus_weak_white_24dp"
+        app:elevation="8dp"
+        app:pressedTranslationZ="@dimen/activity_vertical_margin" />
 
 </android.support.design.widget.CoordinatorLayout>

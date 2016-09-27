@@ -11,6 +11,7 @@ public class AppConstants {
     public static final String PREFS_GROUP = "group";
     public static final String PREFS_HINTS = "hints_remaining";
     public static final String PREFS_BONUS = "bonus_unlocked";
+    public static final String PREFS_LEVEL = "level";
 
     // Groups
     public static final int GROUP1 = 1;
