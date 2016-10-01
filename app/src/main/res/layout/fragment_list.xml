@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
-    android:name="thedorkknightrises.techraceapp.LocationFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:clipToPadding="false"
-    app:layoutManager="LinearLayoutManager"
-    tools:context=".locations.LocationFragment"
-    tools:listitem="@layout/fragment_list_item" />
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        android:name="thedorkknightrises.techraceapp.LocationFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".locations.LocationFragment"
+        tools:listitem="@layout/fragment_list_item" />
+
+    <TextView
+        android:id="@+id/empty_view"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone" />
+
+</android.support.design.widget.CoordinatorLayout>
+

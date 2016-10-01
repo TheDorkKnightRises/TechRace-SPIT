@@ -29,15 +29,22 @@
             android:label="@string/licences"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".ui.PeopleActivity"
+            android:label="@string/credits"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".ui.HintActivity"
             android:label="Hint"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.IntroActivity"
             android:theme="@style/Theme.Intro" />
         <activity
             android:name=".ui.DetailsActivity"
             android:theme="@style/AppTheme.StatusbarOverlay" />
+        <activity
+            android:name=".ui.ContactActivity"
+            android:label="@string/action_help" />
     </application>
 
 </manifest>

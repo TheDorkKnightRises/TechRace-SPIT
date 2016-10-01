@@ -102,8 +102,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(MainActivity.this, AboutActivity.class),
                     ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-        } else if (id == R.id.nav_settings) {
-
+        } else if (id == R.id.nav_contact) {
+            startActivity(new Intent(MainActivity.this, ContactActivity.class),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
         }
 
         drawer.closeDrawer(GravityCompat.START);

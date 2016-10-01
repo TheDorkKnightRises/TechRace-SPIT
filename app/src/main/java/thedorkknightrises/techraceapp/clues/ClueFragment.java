@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -51,11 +52,11 @@ public class ClueFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
+        if (recyclerView != null) {
+            Context context = recyclerView.getContext();
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -64,6 +65,10 @@ public class ClueFragment extends Fragment {
             SharedPreferences pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
             List<ClueContent.Clue> ITEMS = ((pref.getInt(AppConstants.PREFS_GROUP, 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1).subList(0, pref.getInt(AppConstants.PREFS_LEVEL, 0));
             recyclerView.setAdapter(new ClueAdapter(ITEMS, getActivity()));
+            if (ITEMS.isEmpty()) {
+                ((TextView) view.findViewById(R.id.empty_view)).setText(getString(R.string.no_clues));
+                view.findViewById(R.id.empty_view).setVisibility(View.VISIBLE);
+            }
         }
         return view;
     }

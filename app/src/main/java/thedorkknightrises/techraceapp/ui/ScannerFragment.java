@@ -175,13 +175,15 @@ public class ScannerFragment extends Fragment {
 
         int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
 
-        if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
-            clueText.setText(ClueContent.ITEMS_1.get(level).details);
-        else clueText.setText(ClueContent.ITEMS_2.get(level).details);
+        if (pref.getBoolean(AppConstants.PREFS_UNLOCKED, false)) {
+            if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+                clueText.setText(ClueContent.ITEMS_1.get(level).details);
+            else clueText.setText(ClueContent.ITEMS_2.get(level).details);
 
-        if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
-            bonusClueText.setText(ClueContent.ITEMS_2.get(level).details);
-        else bonusClueText.setText(ClueContent.ITEMS_1.get(level).details);
+            if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+                bonusClueText.setText(ClueContent.ITEMS_2.get(level).details);
+            else bonusClueText.setText(ClueContent.ITEMS_1.get(level).details);
+        }
     }
 
 

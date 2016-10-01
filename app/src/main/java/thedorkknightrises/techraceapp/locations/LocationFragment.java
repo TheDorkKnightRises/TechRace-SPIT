@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
 
@@ -49,19 +51,20 @@ public class LocationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
 
         pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
 
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        if (recyclerView != null) {
             Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new LocationAdapter(LocationContent.ITEMS.subList(0, pref.getInt(AppConstants.PREFS_LEVEL, 0) + 1), getActivity()));
+            List<LocationContent.Location> ITEMS = LocationContent.ITEMS.subList(0, pref.getInt(AppConstants.PREFS_LEVEL, 0) + 1);
+            recyclerView.setAdapter(new LocationAdapter(ITEMS, getActivity()));
         }
         return view;
     }

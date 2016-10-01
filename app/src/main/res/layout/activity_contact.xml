@@ -3,18 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:orientation="vertical"
+        android:paddingBottom="54dp"
         tools:context=".ui.AboutActivity">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:elevation="4dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardUseCompatPadding="true">
@@ -25,27 +32,49 @@
                 android:orientation="vertical"
                 android:padding="@dimen/activity_horizontal_margin">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/activity_horizontal_margin"
-                    android:src="@mipmap/ic_launcher" />
-
                 <TextView
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/app_name" />
+                    android:text="@string/contact_help" />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:gravity="center"
+                    android:text="@string/contact_help_desc"
+                    android:textStyle="italic" />
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:autoLink="phone"
                     android:gravity="center"
-                    android:text="@string/app_desc" />
+                    android:text="@string/helpline_1" />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:autoLink="phone"
+                    android:gravity="center"
+                    android:text="@string/helpline_2" />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:autoLink="phone"
+                    android:gravity="center"
+                    android:text="@string/helpline_3" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -53,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:elevation="4dp"
             android:foreground="?android:attr/selectableItemBackground"
             app:cardUseCompatPadding="true">
@@ -67,59 +98,36 @@
                     style="@style/TextAppearance.AppCompat.Large"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/credits" />
+                    android:gravity="center"
+                    android:text="@string/app_help" />
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/credits_desc" />
-
-                <Button
-                    android:id="@+id/people_btn"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/view" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:elevation="4dp"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardUseCompatPadding="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/activity_horizontal_margin">
-
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Large"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/licences" />
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:gravity="center"
+                    android:text="@string/app_help_desc"
+                    android:textStyle="italic" />
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/licence_desc" />
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:autoLink="phone"
+                    android:gravity="center"
+                    android:text="@string/app_helpline_1" />
 
-                <Button
-                    android:id="@+id/licence_btn"
-                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Medium"
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="@string/view_notices" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:autoLink="phone"
+                    android:gravity="center"
+                    android:text="@string/app_helpline_2" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
     </LinearLayout>

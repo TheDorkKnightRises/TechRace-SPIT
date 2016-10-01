@@ -24,7 +24,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +36,7 @@ public class HintActivity extends AppCompatActivity {
     final String TAG = "HintActivity";
     int flippedTile = -1;
     int matches = 0;
+    int moves = 15;
     boolean backPressFlag = false;
     int[] icons = {
             R.drawable.ic_account_circle_white_24dp,
@@ -54,6 +54,8 @@ public class HintActivity extends AppCompatActivity {
     GridView gridView;
     @BindView(R.id.hintRootView)
     CoordinatorLayout rootView;
+    @BindView(R.id.counter)
+    TextView counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +136,6 @@ public class HintActivity extends AppCompatActivity {
     }
 
     private List<Tile> getTiles() {
-        Random random = new Random();
 
         List<Tile> tiles = new ArrayList<>(12);
 
@@ -224,6 +225,7 @@ public class HintActivity extends AppCompatActivity {
                         final FlipView flippedView = (FlipView) gridView.getChildAt(flippedTile);
                         if (i == tiles.get(flippedTile).getMatchPosition()) { // Tiles matched
                             Log.d(TAG, "Icons match");
+                            moves--;
                             flippedView.animate().scaleX(0).scaleY(0).withEndAction(new Runnable() {
                                 @Override
                                 public void run() {
@@ -252,6 +254,7 @@ public class HintActivity extends AppCompatActivity {
                             }
                         } else { // Tiles don't match
                             Log.d(TAG, "Icons don't match");
+                            moves--;
                             new Handler().postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
@@ -265,6 +268,10 @@ public class HintActivity extends AppCompatActivity {
                             snackbar.show();
                         }
                         flippedTile = -1;
+                        if (moves == 0) {
+                            Toast.makeText(getApplicationContext(), "Out of moves!", Toast.LENGTH_LONG).show();
+                            finish();
+                        } else counter.setText(Integer.toString(moves));
                     } else {
                         flipView.flip(true);
                         flippedTile = i;
