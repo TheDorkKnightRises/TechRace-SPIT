@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/hintRootView"
     android:layout_width="match_parent"
@@ -28,15 +29,121 @@
 
     </LinearLayout>
 
-    <GridView
-        android:id="@+id/gridView"
+    <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="32dp"
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:numColumns="3"
-        android:paddingTop="16dp"
-        android:verticalSpacing="8dp" />
+        android:paddingTop="32dp"
+        app:columnCount="3"
+        app:rowCount="4">
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile0"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="0"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile1"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile2"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="2"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile3"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="3"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile4"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="4"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile5"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="5"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile6"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="6"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile7"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="7"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile8"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="8"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile9"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="9"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile10"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="10"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+        <eu.davidea.flipview.FlipView
+            android:id="@+id/tile11"
+            android:clickable="true"
+            android:foregroundGravity="center"
+            android:padding="16dp"
+            android:tag="11"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1" />
+
+    </android.support.v7.widget.GridLayout>
 
 </android.support.design.widget.CoordinatorLayout>

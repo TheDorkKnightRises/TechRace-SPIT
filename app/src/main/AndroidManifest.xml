@@ -34,7 +34,9 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.HintActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="Hint"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.IntroActivity"

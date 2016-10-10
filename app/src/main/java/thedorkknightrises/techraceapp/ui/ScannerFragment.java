@@ -84,26 +84,28 @@ public class ScannerFragment extends Fragment {
             hintsRemaining = 2;
             edit.putInt(AppConstants.PREFS_HINTS, hintsRemaining);
             edit.apply();
-        }
-
-        if (hintsRemaining == 0) {
+        } else if (hintsRemaining == 0) {
             hintBtn.setEnabled(false);
             hintBtn.setTextColor(Color.GRAY);
         }
 
         hintBtn.setText(String.format(Locale.ENGLISH, "Hint (%d)", hintsRemaining));
 
-        if (hintsRemaining == 0) hintBtn.setEnabled(false);
-        else hintBtn.setOnClickListener(getOnClickListener(hintsRemaining));
+        hintBtn.setOnClickListener(getOnClickListener(hintsRemaining));
+        if (hintsRemaining == 0 || pref.getBoolean(AppConstants.PREFS_BONUS, false))
+            hintBtn.setEnabled(false);
+        else hintBtn.setEnabled(true);
     }
 
     private View.OnClickListener getOnClickListener(final int hintsRemaining) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), HintActivity.class);
-                // intent.putExtra("hint_drawable", R.drawable.ic_clear_white_24dp);
-                startActivity(intent);
+
+                if (hintsRemaining > 0) {
+                    Intent intent = new Intent(getActivity(), HintActivity.class);
+                    startActivity(intent);
+                }
             }
         };
     }
@@ -167,8 +169,8 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        setupHintsButton();
         setupBonusHint();
+        setupHintsButton();
 
         TextView clueText = (TextView) root.findViewById(R.id.clueText);
         TextView bonusClueText = (TextView) root.findViewById(R.id.bonusClueText);
