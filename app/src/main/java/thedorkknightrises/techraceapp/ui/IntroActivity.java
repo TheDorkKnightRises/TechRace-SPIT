@@ -49,8 +49,8 @@ public class IntroActivity extends com.heinrichreimersoftware.materialintro.app.
                 .title(R.string.redbull_event)
                 .description(R.string.redbull_desc_short)
                 .image(R.drawable.redbull_intro)
-                .background(R.color.cardview_light_background)
-                .backgroundDark(R.color.cardview_light_background)
+                .background(R.color.white)
+                .backgroundDark(R.color.grey)
                 .build());
 
         setNavigationPolicy(new NavigationPolicy() {

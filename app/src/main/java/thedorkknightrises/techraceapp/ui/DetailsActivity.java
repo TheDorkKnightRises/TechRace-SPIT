@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import thedorkknightrises.techraceapp.R;
@@ -51,7 +53,10 @@ public class DetailsActivity extends AppCompatActivity {
             clue_desc.setText(Html.fromHtml(clue));
         location_desc.setText(Html.fromHtml(location_text));
         if (image_resource != 0)
-            bg_img.setImageDrawable(getResources().getDrawable(image_resource));
+            Glide.with(this)
+                    .load(image_resource)
+                    .crossFade()
+                    .into(bg_img);
     }
 
     @Override
