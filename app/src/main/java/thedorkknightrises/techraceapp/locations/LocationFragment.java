@@ -3,6 +3,7 @@ package thedorkknightrises.techraceapp.locations;
 import android.animation.Animator;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import thedorkknightrises.techraceapp.AppConstants;
 import thedorkknightrises.techraceapp.R;
+import thedorkknightrises.techraceapp.ui.DetailsActivity;
 
 public class LocationFragment extends Fragment {
 
@@ -57,12 +59,22 @@ public class LocationFragment extends Fragment {
 
         // Set the adapter
         if (recyclerView != null) {
-            Context context = view.getContext();
+            final Context context = view.getContext();
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            view.findViewById(R.id.redbull_banner).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(context, DetailsActivity.class);
+                    i.putExtra("image", R.drawable.redbull);
+                    i.putExtra("location", getResources().getString(R.string.redbull_event));
+                    i.putExtra("location_desc", getResources().getString(R.string.redbull_desc_long));
+                    context.startActivity(i);
+                }
+            });
             List<LocationContent.Location> ITEMS = LocationContent.ITEMS.subList(0, pref.getInt(AppConstants.PREFS_LEVEL, 0) + 1);
             recyclerView.setAdapter(new LocationAdapter(ITEMS, getActivity()));
         }

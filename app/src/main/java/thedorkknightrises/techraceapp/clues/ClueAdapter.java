@@ -3,6 +3,7 @@ package thedorkknightrises.techraceapp.clues;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,7 @@ public class ClueAdapter extends RecyclerView.Adapter<ClueAdapter.ViewHolder> {
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).name);
-        holder.mDescView.setText(mValues.get(position).details);
+        holder.mDescView.setText(Html.fromHtml(mValues.get(position).details));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

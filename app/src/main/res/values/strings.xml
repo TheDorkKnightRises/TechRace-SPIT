@@ -42,7 +42,7 @@
     <string name="hints_desc">Match the tiles with the same icons by clicking on the circles. Tiles
     disappear when they match. Complete this challenge and an additional clue will present itself.</string>
 
-    <string name="licences">Licences</string>
+    <string name="licences">Open source licences</string>
     <string name="licence_desc">Attribution notices for the libraries used</string>
     <string name="view_notices">Show notices</string>
     <string name="support_lib">Android Support Library</string>
@@ -89,6 +89,46 @@
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  See the License for the specific language governing permissions and
  limitations under the License.</string>
+    <string name="intro">material-intro</string>
+    <string name="intro_desc">Copyright 2016 Heinrich Reimer\n\n
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at\n\n
+        \thttp://www.apache.org/licenses/LICENSE-2.0\n\n
+        Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.</string>
+    <string name="glide">Glide</string>
+    <string name="glide_desc">Copyright 2014 Google, Inc. All rights reserved.
+\n\n
+Redistribution and use in source and binary forms, with or without modification, are
+permitted provided that the following conditions are met:
+\n\n
+   1. Redistributions of source code must retain the above copyright notice, this list of
+         conditions and the following disclaimer.
+\n\n
+   2. Redistributions in binary form must reproduce the above copyright notice, this list
+         of conditions and the following disclaimer in the documentation and/or other materials
+         provided with the distribution.
+\n\n
+THIS SOFTWARE IS PROVIDED BY GOOGLE, INC. "AS IS" AND ANY EXPRESS OR IMPLIED
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
+FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL GOOGLE, INC. OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The views and conclusions contained in the software and documentation are those of the
+authors and should not be interpreted as representing official policies, either expressed
+or implied, of Google, Inc.
+    \n\nFor third-party license details, see LICENSE file:
+    \nhttps://github.com/bumptech/glide/blob/master/LICENSE</string>
+
     <string name="people_name_1">Neil Daftary</string>
     <string name="people_desc_1">Executive Head</string>
     <string name="people_name_2">Aditya Gaikwad</string>
@@ -109,4 +149,9 @@
     <string name="people_desc_8">Tech Head</string>
     <string name="people_name_9">Disha Gandhi</string>
     <string name="people_desc_9">Marketing Head</string>
+
+    <string name="redbull_event">Red Bull Soapbox Race 2016</string>
+    <string name="redbull_desc_short">Where Genius Meets Ridiculous</string>
+    <string name="redbull_desc_long">The Red Bull Soapbox Race is an international event that started back in the year 2000, in Brussels. Since then, more than a hundred Red Bull Soapbox Races have been organised globally. India will host this one-of-a-kind event with all its craziness for a second time this year. In an outrageous downhill race, racers are welcomed to build their own soapbox and compete against gravity. Each of these hand-made machines have no engine on them. So how do I get to the finish line, you might ask? With a big push from your teammates, a little bit of luck and a big dollop of eccentricity! Back in 2012, people witnessed everything from a vadapav to a pizza slice roll down Mount Mary slope in the inaugural edition of Soapbox. This November, Red Bull Soapbox Race returns, and it promises to be bigger and better. So, are you in for the ride?
+    \n\nFor more information, visit http://www.redbullsoapboxrace.com/</string>
 </resources>

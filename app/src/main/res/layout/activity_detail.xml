@@ -84,6 +84,7 @@
                         android:id="@+id/location_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:autoLink="web"
                         tools:text="Description of this location\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
                 </LinearLayout>
             </android.support.v7.widget.CardView>

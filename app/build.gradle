@@ -39,4 +39,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.2.1'
     compile 'com.heinrichreimersoftware:material-intro:1.5.7'
     compile 'com.github.ashnehete:FlipView:cd4f1cc44c'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 }

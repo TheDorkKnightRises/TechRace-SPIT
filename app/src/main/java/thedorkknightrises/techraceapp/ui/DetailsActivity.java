@@ -1,11 +1,16 @@
 package thedorkknightrises.techraceapp.ui;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -21,6 +26,8 @@ public class DetailsActivity extends AppCompatActivity {
     TextView location_desc;
     @BindView(R.id.clue_desc)
     TextView clue_desc;
+    @BindView(R.id.bg_img)
+    ImageView bg_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,16 +37,21 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        if (Build.VERSION.SDK_INT > 21) setupWindowAnimations();
+
         Bundle bundle = getIntent().getExtras();
         String location = bundle.getString("location");
         String clue = bundle.getString("clue");
         String location_text = bundle.getString("location_desc");
+        int image_resource = bundle.getInt("image", 0);
         collapsingToolbarLayout.setTitle(location);
         if (clue == null)
             findViewById(R.id.clue_card).setVisibility(View.GONE);
         else
-            clue_desc.setText(clue);
-        location_desc.setText(location_text);
+            clue_desc.setText(Html.fromHtml(clue));
+        location_desc.setText(Html.fromHtml(location_text));
+        if (image_resource != 0)
+            bg_img.setImageDrawable(getResources().getDrawable(image_resource));
     }
 
     @Override
@@ -55,5 +67,13 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    private void setupWindowAnimations() {
+        Slide slide = new Slide();
+        slide.setDuration(300);
+        getWindow().setEnterTransition(slide);
+        getWindow().setReenterTransition(slide);
     }
 }

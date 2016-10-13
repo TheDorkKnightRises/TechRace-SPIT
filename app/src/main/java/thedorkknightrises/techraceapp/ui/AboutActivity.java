@@ -20,6 +20,8 @@ public class AboutActivity extends AppCompatActivity {
     Button button_license;
     @BindView(R.id.people_btn)
     Button button_people;
+    @BindView(R.id.sponsors_btn)
+    Button button_sponsors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,13 @@ public class AboutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(AboutActivity.this);
                 startActivity(new Intent(AboutActivity.this, PeopleActivity.class), options.toBundle());
+            }
+        });
+        button_sponsors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(AboutActivity.this);
+                startActivity(new Intent(AboutActivity.this, SponsorsActivity.class), options.toBundle());
             }
         });
     }

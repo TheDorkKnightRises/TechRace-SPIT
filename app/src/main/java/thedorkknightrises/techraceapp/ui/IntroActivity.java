@@ -29,22 +29,28 @@ public class IntroActivity extends com.heinrichreimersoftware.materialintro.app.
         addSlide(new SimpleSlide.Builder()
                 .title(R.string.app_name)
                 .description(R.string.app_desc)
-                .image(R.mipmap.ic_launcher)
+                .image(R.drawable.ic_launcher)
                 .background(R.color.colorPrimary)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .build());
         addSlide(new FragmentSlide.Builder()
-                .background(R.color.colorPrimary)
+                .background(R.color.colorPrimaryDarker)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .fragment(CodeFragment.newInstance())
                 .build());
         addSlide(new SimpleSlide.Builder()
                 .title(R.string.camera)
                 .description(R.string.camera_desc)
-                .image(R.mipmap.ic_launcher)
                 .background(R.color.colorPrimary)
                 .backgroundDark(R.color.colorPrimaryDark)
                 .permission(Manifest.permission.CAMERA)
+                .build());
+        addSlide(new SimpleSlide.Builder()
+                .title(R.string.redbull_event)
+                .description(R.string.redbull_desc_short)
+                .image(R.drawable.redbull_intro)
+                .background(R.color.cardview_light_background)
+                .backgroundDark(R.color.cardview_light_background)
                 .build());
 
         setNavigationPolicy(new NavigationPolicy() {

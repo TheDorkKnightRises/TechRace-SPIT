@@ -47,6 +47,9 @@
         <activity
             android:name=".ui.ContactActivity"
             android:label="@string/action_help" />
+        <activity
+            android:name=".ui.SponsorsActivity"
+            android:label="Sponsors" />
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import java.util.Locale;
 
 import thedorkknightrises.techraceapp.AppConstants;
+import thedorkknightrises.techraceapp.Codes;
 import thedorkknightrises.techraceapp.R;
 import thedorkknightrises.techraceapp.clues.ClueContent;
 import thedorkknightrises.techraceapp.locations.LocationContent;
@@ -178,13 +180,20 @@ public class ScannerFragment extends Fragment {
         int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
 
         if (pref.getBoolean(AppConstants.PREFS_UNLOCKED, false)) {
-            if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
-                clueText.setText(ClueContent.ITEMS_1.get(level).details);
-            else clueText.setText(ClueContent.ITEMS_2.get(level).details);
 
-            if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
-                bonusClueText.setText(ClueContent.ITEMS_2.get(level).details);
-            else bonusClueText.setText(ClueContent.ITEMS_1.get(level).details);
+            if (level < 12) {
+                if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+                    clueText.setText(Html.fromHtml(ClueContent.ITEMS_1.get(level).details));
+                else clueText.setText(Html.fromHtml(ClueContent.ITEMS_2.get(level).details));
+
+                if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+                    bonusClueText.setText(Html.fromHtml(ClueContent.ITEMS_2.get(level).details));
+                else bonusClueText.setText(Html.fromHtml(ClueContent.ITEMS_1.get(level).details));
+            } else {
+                root.findViewById(R.id.clueTitle).setVisibility(View.GONE);
+                hintBtn.setVisibility(View.GONE);
+                clueText.setText("\uD83C\uDF89 You have successfully completed the SPIT TechRace 2K16 \uD83C\uDF8A \n\nStep forth so you may receive the honor and glory that is your due \uD83C\uDF96");
+            }
         }
     }
 
@@ -328,10 +337,11 @@ public class ScannerFragment extends Fragment {
     }
 
     private void scanned(String code) {
-        if (code.equals("12345678")) {
+        int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
+        if (level >= 12) return;
+        if (code.equals(Codes.ITEMS.get(level))) {
             Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
             pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
-            int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
             level++;
             edit = pref.edit();
             edit.putBoolean(AppConstants.PREFS_BONUS, false);
