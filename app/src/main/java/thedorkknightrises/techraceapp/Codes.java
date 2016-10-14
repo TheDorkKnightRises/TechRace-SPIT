@@ -15,9 +15,10 @@ public class Codes {
     public static final List<String> ITEMS = new ArrayList<>();
 
     static {
-        ITEMS.add("11111111");
-        ITEMS.add("22222222");
-        ITEMS.add("12345678");
+        ITEMS.add("bhavloc1");
+        ITEMS.add("andseloc2");
+        ITEMS.add("parfloc3");
+        ITEMS.add("sidvloc4");
         ITEMS.add("12345678");
         ITEMS.add("12345678");
         ITEMS.add("12345678");

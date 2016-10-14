@@ -14,7 +14,10 @@
             android:id="@+id/redbull_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:maxHeight="64dp"
             android:src="@drawable/redbull_banner"
             android:visibility="visible" />
 

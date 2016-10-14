@@ -1,12 +1,19 @@
 package thedorkknightrises.techraceapp.ui;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.transition.Slide;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,6 +37,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView clue_desc;
     @BindView(R.id.bg_img)
     ImageView bg_img;
+    int image_resource = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +53,43 @@ public class DetailsActivity extends AppCompatActivity {
         String location = bundle.getString("location");
         String clue = bundle.getString("clue");
         String location_text = bundle.getString("location_desc");
-        int image_resource = bundle.getInt("image", 0);
+        image_resource = bundle.getInt("image", 0);
         collapsingToolbarLayout.setTitle(location);
         if (clue == null)
             findViewById(R.id.clue_card).setVisibility(View.GONE);
-        else
+        else {
+            clue_desc.setMovementMethod(LinkMovementMethod.getInstance());
             clue_desc.setText(Html.fromHtml(clue));
+        }
         location_desc.setText(Html.fromHtml(location_text));
         if (image_resource != 0)
             Glide.with(this)
                     .load(image_resource)
                     .crossFade()
                     .into(bg_img);
+    }
+
+    public void onImageClick(View v) {
+        Intent i = new Intent(DetailsActivity.this, ImageActivity.class);
+        i.setAction(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("image://techrace2k16.image/" + image_resource));
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+            v.setTransitionName("image");
+            Pair participants = new Pair<>(v, ViewCompat.getTransitionName(v));
+
+            ActivityOptionsCompat transitionActivityOptions =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                            DetailsActivity.this, participants);
+
+            ActivityCompat.startActivity(DetailsActivity.this,
+                    i, transitionActivityOptions.toBundle());
+
+        } else {
+            ActivityOptionsCompat trans = ActivityOptionsCompat.makeSceneTransitionAnimation(DetailsActivity.this);
+            ActivityCompat.startActivity(DetailsActivity.this, i, trans.toBundle());
+        }
     }
 
     @Override

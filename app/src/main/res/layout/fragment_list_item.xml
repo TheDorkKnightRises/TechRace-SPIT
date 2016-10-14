@@ -17,12 +17,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?attr/textAppearanceListItem"
-            tools:text="NAME"/>
+            android:textSize="18sp"
+            tools:text="Name" />
         <TextView
             android:id="@+id/location_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            tools:text="DESCRIPTION"/>
+            android:textSize="16sp"
+            tools:text="Description" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

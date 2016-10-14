@@ -11,16 +11,17 @@ public class AppConstants {
     public static final String PREFS_GROUP = "group";
     public static final String PREFS_HINTS = "hints_remaining";
     public static final String PREFS_BONUS = "bonus_unlocked";
+    public static final String PREFS_INAPP = "in_app";
+    public static final String PREFS_INAPP_Q = "in_app_q";
+    public static final String PREFS_INAPP_A = "in_app_a";
     public static final String PREFS_LEVEL = "level";
 
     // Groups
     public static final int GROUP1 = 1;
     public static final int GROUP2 = 2;
-    public static final int GROUP3 = 3;
 
-    public static final String PASSCODE1 = "UB3RH4XX0R";
-    public static final String PASSCODE2 = "AAAAAAAA";
-    public static final String PASSCODE3 = "BBBBBBBB";
+    public static final String PASSCODE1 = "AAAAAAAA";
+    public static final String PASSCODE2 = "BBBBBBBB";
 
     // Page
     public static final int PAGE_SCANNER = 0;

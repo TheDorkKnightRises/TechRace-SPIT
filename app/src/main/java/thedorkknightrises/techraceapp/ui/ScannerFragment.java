@@ -18,6 +18,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -93,7 +94,12 @@ public class ScannerFragment extends Fragment {
 
         hintBtn.setText(String.format(Locale.ENGLISH, "Hint (%d)", hintsRemaining));
 
-        hintBtn.setOnClickListener(getOnClickListener(hintsRemaining));
+        int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
+        if (level == 0 || level == 3 || level == 4 || level == 9 || level == 10 || level == 11) {
+            hintBtn.setText("No hint");
+            hintBtn.setClickable(false);
+            hintBtn.setEnabled(false);
+        } else hintBtn.setOnClickListener(getOnClickListener(hintsRemaining));
         if (hintsRemaining == 0 || pref.getBoolean(AppConstants.PREFS_BONUS, false))
             hintBtn.setEnabled(false);
         else hintBtn.setEnabled(true);
@@ -126,13 +132,7 @@ public class ScannerFragment extends Fragment {
         getActivity().invalidateOptionsMenu();
 
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fab.setClickable(false);
-                enterReveal();
-            }
-        });
+
         fab.setVisibility(View.VISIBLE);
         fab.animate().scaleX(1).scaleY(1).setDuration(300).setListener(new Animator.AnimatorListener() {
             @Override
@@ -175,25 +175,48 @@ public class ScannerFragment extends Fragment {
         setupHintsButton();
 
         TextView clueText = (TextView) root.findViewById(R.id.clueText);
+        clueText.setMovementMethod(LinkMovementMethod.getInstance());
         TextView bonusClueText = (TextView) root.findViewById(R.id.bonusClueText);
 
-        int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
+        final int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
 
         if (pref.getBoolean(AppConstants.PREFS_UNLOCKED, false)) {
 
-            if (level < 12) {
-                if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
+            if (level < LocationContent.ITEMS.size() - 1) {
+                if (pref.getInt(AppConstants.PREFS_GROUP, AppConstants.GROUP1) == AppConstants.GROUP1) {
                     clueText.setText(Html.fromHtml(ClueContent.ITEMS_1.get(level).details));
-                else clueText.setText(Html.fromHtml(ClueContent.ITEMS_2.get(level).details));
-
-                if (pref.getInt(AppConstants.PREFS_GROUP, 1) == 1)
                     bonusClueText.setText(Html.fromHtml(ClueContent.ITEMS_2.get(level).details));
-                else bonusClueText.setText(Html.fromHtml(ClueContent.ITEMS_1.get(level).details));
+                } else {
+                    clueText.setText(Html.fromHtml(ClueContent.ITEMS_2.get(level).details));
+                    bonusClueText.setText(Html.fromHtml(ClueContent.ITEMS_1.get(level).details));
+                }
             } else {
                 root.findViewById(R.id.clueTitle).setVisibility(View.GONE);
                 hintBtn.setVisibility(View.GONE);
                 clueText.setText("\uD83C\uDF89 You have successfully completed the SPIT TechRace 2K16 \uD83C\uDF8A \n\nStep forth so you may receive the honor and glory that is your due \uD83C\uDF96");
             }
+        }
+
+        if ((level == 1 || level == 4 || level == 11) && !pref.getBoolean(AppConstants.PREFS_INAPP, false)) {
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_lock_white_24dp));
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(getActivity(), InAppChallengeActivity.class);
+                    i.putExtra(AppConstants.PREFS_INAPP_Q, ClueContent.getInAppChallenge(level + 1).question);
+                    i.putExtra(AppConstants.PREFS_INAPP_A, ClueContent.getInAppChallenge(level + 1).answer);
+                    startActivity(i);
+                }
+            });
+        } else {
+            fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_center_focus_weak_white_24dp));
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fab.setClickable(false);
+                    enterReveal();
+                }
+            });
         }
     }
 
@@ -338,7 +361,8 @@ public class ScannerFragment extends Fragment {
 
     private void scanned(String code) {
         int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
-        if (level >= 12) return;
+        if (level >= LocationContent.ITEMS.size() - 1 || ((level == 1 || level == 4 || level == 11) && !pref.getBoolean(AppConstants.PREFS_INAPP, false)))
+            return;
         if (code.equals(Codes.ITEMS.get(level))) {
             Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();
             pref = getActivity().getSharedPreferences(AppConstants.PREFS, Context.MODE_PRIVATE);
@@ -346,6 +370,7 @@ public class ScannerFragment extends Fragment {
             edit = pref.edit();
             edit.putBoolean(AppConstants.PREFS_BONUS, false);
             edit.putInt(AppConstants.PREFS_LEVEL, level);
+            edit.putBoolean(AppConstants.PREFS_INAPP, false);
             edit.apply();
             onResume();
 
@@ -357,6 +382,7 @@ public class ScannerFragment extends Fragment {
                             .setAutoCancel(true);
 
             Intent resultIntent = new Intent(getActivity(), DetailsActivity.class);
+            resultIntent.putExtra("image", LocationContent.ITEMS.get(level).image);
             resultIntent.putExtra("location", LocationContent.ITEMS.get(level).name);
             resultIntent.putExtra("location_desc", LocationContent.ITEMS.get(level).details);
 

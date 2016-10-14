@@ -3,6 +3,8 @@ package thedorkknightrises.techraceapp.locations;
 import java.util.ArrayList;
 import java.util.List;
 
+import thedorkknightrises.techraceapp.R;
+
 public class LocationContent {
 
     /**
@@ -11,30 +13,33 @@ public class LocationContent {
     public static final List<Location> ITEMS = new ArrayList<>();
 
     static {
-        ITEMS.add(new Location(0, "Bhavan's Campus", "Location"));
-        ITEMS.add(new Location(1, "Andheri East Station", "Location"));
-        ITEMS.add(new Location(2, "Parle Factory", "Location"));
-        ITEMS.add(new Location(3, "Siddhivinayak", "Location"));
-        ITEMS.add(new Location(4, "Worli Seaface", "Location"));
-        ITEMS.add(new Location(5, "Nehru Science Center", "Location"));
-        ITEMS.add(new Location(6, "Hanging Gardens", "Location"));
-        ITEMS.add(new Location(7, "NCPA", "Location"));
-        ITEMS.add(new Location(8, "BSE", "Location"));
-        ITEMS.add(new Location(9, "Azad Maidan", "Location"));
-        ITEMS.add(new Location(10, "Byculla Zoo", "Location"));
-        ITEMS.add(new Location(11, "Bandra Station", "Location"));
-        ITEMS.add(new Location(12, "SPIT", "Location"));
+        ITEMS.add(new Location(0, "SPIT Quad", "This is where your journey starts...", R.drawable.spit));
+        ITEMS.add(new Location(1, "Bhavan's Campus", "Location", R.drawable.banner));
+        ITEMS.add(new Location(2, "Andheri East Station", "Location", R.drawable.banner));
+        ITEMS.add(new Location(3, "Parle Factory", "Location", R.drawable.banner));
+        ITEMS.add(new Location(4, "Siddhivinayak", "Location", R.drawable.banner));
+        ITEMS.add(new Location(5, "Nehru Science Center", "Location", R.drawable.banner));
+        ITEMS.add(new Location(6, "Worli Seaface", "Location", R.drawable.banner));
+        ITEMS.add(new Location(7, "Hanging Gardens", "Location", R.drawable.banner));
+        ITEMS.add(new Location(8, "NCPA", "Location", R.drawable.banner));
+        ITEMS.add(new Location(9, "BSE", "Location", R.drawable.banner));
+        ITEMS.add(new Location(10, "Azad Maidan", "Location", R.drawable.banner));
+        ITEMS.add(new Location(11, "Byculla Zoo", "Location", R.drawable.banner));
+        ITEMS.add(new Location(12, "Bandra Station", "Location", R.drawable.p12));
+        ITEMS.add(new Location(13, "SPIT", "Location", R.drawable.spit));
     }
 
     public static class Location {
         public final int id;
         public final String name;
         public final String details;
+        public int image;
 
-        public Location(int id, String name, String details) {
+        public Location(int id, String name, String details, int imageRes) {
             this.id = id;
             this.name = name;
             this.details = details;
+            this.image = imageRes;
         }
 
         @Override

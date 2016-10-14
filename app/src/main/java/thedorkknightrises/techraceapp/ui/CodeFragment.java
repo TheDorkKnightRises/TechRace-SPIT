@@ -61,14 +61,6 @@ public class CodeFragment extends SlideFragment {
                     edit.commit();
                     updateNavigation();
                     Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
-                } else if (passcode.getText().toString().equals(AppConstants.PASSCODE3)) {
-                    unlocked = true;
-                    unlocked();
-                    edit.putBoolean(AppConstants.PREFS_UNLOCKED, true);
-                    edit.putInt(AppConstants.PREFS_GROUP, AppConstants.GROUP3);
-                    edit.commit();
-                    updateNavigation();
-                    Toast.makeText(getContext(), "Unlocked!", Toast.LENGTH_SHORT).show();
                 } else {
                     passcode.setHintTextColor(Color.RED);
                     passcode.setHint("Incorrect Passcode");

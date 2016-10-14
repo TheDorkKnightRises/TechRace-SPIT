@@ -7,26 +7,17 @@
     android:theme="@style/AppTheme">
 
     <TextView
-        android:id="@+id/lockedText"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/locked" />
-
-    <TextView
         android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:text="@string/locked_desc" />
+        android:padding="@dimen/activity_horizontal_margin" />
 
     <EditText
         android:id="@+id/code"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" />
+        android:ems="10" />
 
     <Button
         android:id="@+id/codeBtn"

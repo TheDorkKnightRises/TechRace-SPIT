@@ -42,6 +42,7 @@ public class ClueAdapter extends RecyclerView.Adapter<ClueAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailsActivity.class);
+                i.putExtra("image", LocationContent.ITEMS.get(holder.getAdapterPosition() + 1).image);
                 i.putExtra("clue", mValues.get(holder.getAdapterPosition()).details);
                 i.putExtra("location", LocationContent.ITEMS.get(holder.getAdapterPosition() + 1).name);
                 i.putExtra("location_desc", LocationContent.ITEMS.get(holder.getAdapterPosition() + 1).details);

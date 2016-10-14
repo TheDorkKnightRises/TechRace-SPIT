@@ -85,27 +85,29 @@ public class LocationFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         getActivity().invalidateOptionsMenu();
         final FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.animate().scaleX(0).scaleY(0).setDuration(300).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-                fab.setClickable(false);
-            }
+        if (fab.getVisibility() == View.VISIBLE) {
+            fab.animate().scaleX(0).scaleY(0).setDuration(300).setListener(new Animator.AnimatorListener() {
+                @Override
+                public void onAnimationStart(Animator animator) {
+                    fab.setClickable(false);
+                }
 
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                fab.setVisibility(View.GONE);
-            }
+                @Override
+                public void onAnimationEnd(Animator animator) {
+                    fab.setVisibility(View.GONE);
+                }
 
-            @Override
-            public void onAnimationCancel(Animator animator) {
-                fab.setClickable(true);
-            }
+                @Override
+                public void onAnimationCancel(Animator animator) {
+                    fab.setClickable(true);
+                }
 
-            @Override
-            public void onAnimationRepeat(Animator animator) {
+                @Override
+                public void onAnimationRepeat(Animator animator) {
 
-            }
-        }).start();
+                }
+            }).start();
+        }
         super.onActivityCreated(savedInstanceState);
     }
 }

@@ -45,6 +45,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, DetailsActivity.class);
+                i.putExtra("image", mValues.get(holder.getAdapterPosition()).image);
                 i.putExtra("location", mValues.get(holder.getAdapterPosition()).name);
                 i.putExtra("location_desc", mValues.get(holder.getAdapterPosition()).details);
                 List<ClueContent.Clue> ITEMS = (pref.getInt(AppConstants.PREFS_GROUP, 1) > 1) ? ClueContent.ITEMS_2 : ClueContent.ITEMS_1;

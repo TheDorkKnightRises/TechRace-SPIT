@@ -50,6 +50,24 @@
         <activity
             android:name=".ui.SponsorsActivity"
             android:label="Sponsors" />
+        <activity
+            android:name=".ui.ImageActivity"
+            android:label="Image"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <data android:scheme="image" />
+                <data android:host="techrace2k16.image" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.InAppChallengeActivity"
+            android:label="In-App Challenge"
+            android:theme="@style/AppTheme.Dialog" />
     </application>
 
 </manifest>
