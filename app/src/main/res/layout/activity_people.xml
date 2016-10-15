@@ -57,6 +57,8 @@
                                 android:layout_width="0px"
                                 android:layout_height="54dp"
                                 android:layout_weight="1"
+                                android:onClick="onClick"
+                                android:tag="https://www.facebook.com/neil.daftary.50"
                                 android:text="Facebook" />
 
                             <Button
@@ -64,7 +66,9 @@
                                 android:layout_width="0px"
                                 android:layout_height="54dp"
                                 android:layout_weight="1"
-                                android:text="Twitter" />
+                                android:onClick="onClick"
+                                android:tag="https://www.instagram.com/neil9820/"
+                                android:text="Instagram" />
 
                         </LinearLayout>
                     </LinearLayout>
@@ -113,6 +117,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://www.facebook.com/aditya.gaikwad.0"
                             android:text="Facebook" />
 
                         <Button
@@ -120,7 +126,9 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Twitter" />
+                            android:onClick="onClick"
+                            android:tag="https://www.instagram.com/__aditya97/"
+                            android:text="Instagram" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -166,14 +174,18 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Facebook" />
+                            android:onClick="onClick"
+                            android:tag="http://ashnehete.in/"
+                            android:text="Website" />
 
                         <Button
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Twitter" />
+                            android:onClick="onClick"
+                            android:tag="https://github.com/ashnehete"
+                            android:text="GitHub" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -219,6 +231,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://www.facebook.com/aditya.desai.790"
                             android:text="Facebook" />
 
                         <Button
@@ -226,7 +240,9 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Twitter" />
+                            android:onClick="onClick"
+                            android:tag="https://www.instagram.com/adityadesai97/"
+                            android:text="Instagram" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -272,6 +288,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://www.facebook.com/harsh.jain.5205622"
                             android:text="Facebook" />
 
                         <Button
@@ -279,6 +297,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://twitter.com/harshj98"
                             android:text="Twitter" />
 
                     </LinearLayout>
@@ -335,8 +355,8 @@
                             android:layout_height="54dp"
                             android:layout_weight="1"
                             android:onClick="onClick"
-                            android:tag="https://plus.google.com/+SamriddhaBasu"
-                            android:text="Google+" />
+                            android:tag="https://github.com/TheDorkKnightRises"
+                            android:text="GitHub" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -382,6 +402,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://www.facebook.com/gandhidisha0"
                             android:text="Facebook" />
 
                         <Button
@@ -389,6 +411,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://twitter.com/DishaGandhi4"
                             android:text="Twitter" />
 
                     </LinearLayout>
@@ -435,14 +459,18 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Facebook" />
+                            android:onClick="onClick"
+                            android:tag="https://www.youtube.com/channel/UCbyWANdSrMxLLdHzpKP6rPA"
+                            android:text="YouTube" />
 
                         <Button
                             style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Twitter" />
+                            android:onClick="onClick"
+                            android:tag="https://www.instagram.com/hj_aka_sociopath"
+                            android:text="Instagram" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -488,14 +516,9 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://www.facebook.com/prutha.atre"
                             android:text="Facebook" />
-
-                        <Button
-                            style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                            android:layout_width="0px"
-                            android:layout_height="54dp"
-                            android:layout_weight="1"
-                            android:text="Twitter" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -541,6 +564,8 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
+                            android:onClick="onClick"
+                            android:tag="https://www.facebook.com/shraddha1710"
                             android:text="Facebook" />
 
                         <Button
@@ -548,7 +573,9 @@
                             android:layout_width="0px"
                             android:layout_height="54dp"
                             android:layout_weight="1"
-                            android:text="Twitter" />
+                            android:onClick="onClick"
+                            android:tag="https://www.linkedin.com/in/shraddha-wani-2b5423109"
+                            android:text="LinkedIn" />
 
                     </LinearLayout>
                 </LinearLayout>

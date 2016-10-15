@@ -20,8 +20,8 @@ public class AppConstants {
     public static final int GROUP1 = 1;
     public static final int GROUP2 = 2;
 
-    public static final String PASSCODE1 = "AAAAAAAA";
-    public static final String PASSCODE2 = "BBBBBBBB";
+    public static final String PASSCODE1 = "ALPHA2K16OMEGA";
+    public static final String PASSCODE2 = "BETA2K16OMEGA";
 
     // Page
     public static final int PAGE_SCANNER = 0;

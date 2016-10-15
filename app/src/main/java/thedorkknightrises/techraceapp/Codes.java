@@ -19,14 +19,13 @@ public class Codes {
         ITEMS.add("andseloc2");
         ITEMS.add("parfloc3");
         ITEMS.add("sidvloc4");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
-        ITEMS.add("12345678");
+        ITEMS.add("nescloc5");
+        ITEMS.add("worlloc6");
+        ITEMS.add("hgardloc7");
+        ITEMS.add("ncpartloc8");
+        ITEMS.add("bsexloc9");
+        ITEMS.add("azmadloc10");
+        ITEMS.add("bandsloc12");
+        ITEMS.add("spitechloc13");
     }
 }

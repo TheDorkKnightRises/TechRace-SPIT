@@ -104,6 +104,9 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment, LocationFragment.newInstance(1)).commit();
             currentPage = AppConstants.PAGE_LOCATIONS;
+        } else if (id == R.id.nav_other) {
+            startActivity(new Intent(MainActivity.this, EventsActivity.class),
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(MainActivity.this, AboutActivity.class),
                     ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());

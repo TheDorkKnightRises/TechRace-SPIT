@@ -16,6 +16,7 @@
     <string name="locations">Locations</string>
     <string name="about">About</string>
     <string name="contact">Helpline</string>
+    <string name="other_events">Other events</string>
 
     <string name="action_help">Help</string>
     <string name="action_confirm">Confirm</string>
@@ -30,6 +31,8 @@
     <string name="helpline_1">Neil Daftary: +91 99209 24813</string>
     <string name="helpline_2">Aditya Desai: +91 90294 62609</string>
     <string name="helpline_3">Aditya Gaikwad: +91 99690 51770</string>
+    <string name="helpline_4">Meet Gopani: +91 99697 63551</string>
+    <string name="helpline_5">Ananya Ojha: +91 99877 01440</string>
     <string name="app_help">Issue with the app?</string>
     <string name="app_help_desc">Call the tech guys!</string>
     <string name="app_helpline_1">Samriddha Basu: +91 96194 02185</string>
@@ -140,7 +143,7 @@ or implied, of Google, Inc.
     <string name="people_name_5">Harsh Jain</string>
     <string name="people_desc_5">Volunteer Operations Head</string>
     <string name="people_name_6">Himanshu Joshi</string>
-    <string name="people_desc_6">Public Relations</string>
+    <string name="people_desc_6">PR and Online Marketing</string>
     <string name="people_name_7">Prutha Atre</string>
     <string name="people_desc_7">Public Relations</string>
     <string name="people_name_10">Shraddha Wani</string>
@@ -154,4 +157,34 @@ or implied, of Google, Inc.
     <string name="redbull_desc_short">Where Genius Meets Ridiculous</string>
     <string name="redbull_desc_long">The Red Bull Soapbox Race is an international event that started back in the year 2000, in Brussels. Since then, more than a hundred Red Bull Soapbox Races have been organised globally. India will host this one-of-a-kind event with all its craziness for a second time this year. In an outrageous downhill race, racers are welcomed to build their own soapbox and compete against gravity. Each of these hand-made machines have no engine on them. So how do I get to the finish line, you might ask? With a big push from your teammates, a little bit of luck and a big dollop of eccentricity! Back in 2012, people witnessed everything from a vadapav to a pizza slice roll down Mount Mary slope in the inaugural edition of Soapbox. This November, Red Bull Soapbox Race returns, and it promises to be bigger and better. So, are you in for the ride?
     \n\nFor more information, visit http://www.redbullsoapboxrace.com/</string>
+
+    <string name="other_events_desc">Here are some other events to watch out for at SPIT\'s tech fest, Matrix</string>
+    <string name="vsm">Virtual Stock Market</string>
+    <string name="vsm_desc">The mega event where participants will be buying and selling shares of their favourite brands and celebs.\nThere are exciting prizes like printers and hard disks, so be sure to take part!</string>
+    <string name="techeshi">Techeshi\'s</string>
+    <string name="techeshi_desc">Techeshi\'s is an event that caters to both - the tech enthusiasts as well as the novices.
+It consists of two major sub-events viz. Line Following Bot and Techeshi\'s Castle.
+The former would be a platform for the technoholics to showcase their talents by building autonomous line following robots. It\'d be a test of the survival of the fittest bot in the truest sense!
+The latter would be a fun event wherein the participants will have a chance to play the most amazing robo games and solve some challenging brain teasers.
+Thus, Techeshi\'s is a perfect blend of brainpower and amusement!</string>
+    <string name="pokemon">Pokemon Showdown</string>
+    <string name="pokemon_desc">The mages and warlocks of Westeros have opened up a portal and Pokémon have landed here from nowhere! The lords and ladies of Westeros now use Pokémon to fight their wars. Defeat anyone(gym leaders) who comes in your way to the Iron Throne. And fight your way against the other false claimants(players). For there can be only one champion.
+\nLore aside, Pokemon Showdown is a Pokemon Tournament with a Game of Thrones theme fit beautifully, to make it an even more exciting competition.</string>
+    <string name="lasertag">Laser Tag</string>
+    <string name="lasertag_desc">Do video games excite you??
+Ever wondered what it would be like holding guns and being out
+there planning out strategies to take down your enemy and emerging as the ultimate winner!
+Well, smack yourself on the head and wake up to the reality where riffle guns could land you in jail 
+Want a third way out? What if we replace the rifle with something less gruesome
+but thrilling as hell! Hence, we the students of Sardar Patel Institute of Technology present to you
+the most awaited event of our College Technical Fest MATRIX
+LAZER TAG! - where NOT shooting your opponent IS a crime!
+Thinks you will be required to carry:
+While agility is optional however your wits and camouflaging skills are a must!
+P.S. Gear up to have the best moments of your life!
+</string>
+    <string name="foosball">Human Foosball</string>
+    <string name="foosball_desc">We all have enjoyed frantically moving the miniature players in foosball. But what if you could become those players? Get a chance to play a lifesize version of foosball. Don\'t worry, no one will be controlling you XD</string>
+    <string name="charades">Tech Charades</string>
+    <string name="charades_desc">How well can you understand your partner\'s state of mind? Well, here\'s your chance to find out!</string>
 </resources>

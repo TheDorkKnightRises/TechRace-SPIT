@@ -95,7 +95,7 @@ public class ScannerFragment extends Fragment {
         hintBtn.setText(String.format(Locale.ENGLISH, "Hint (%d)", hintsRemaining));
 
         int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
-        if (level == 0 || level == 3 || level == 4 || level == 9 || level == 10 || level == 11) {
+        if (level == 0 || level == 3 || level == 4 || level == 8 || level == 9 || level == 10) {
             hintBtn.setText("No hint");
             hintBtn.setClickable(false);
             hintBtn.setEnabled(false);
@@ -193,11 +193,12 @@ public class ScannerFragment extends Fragment {
             } else {
                 root.findViewById(R.id.clueTitle).setVisibility(View.GONE);
                 hintBtn.setVisibility(View.GONE);
+                fab.setVisibility(View.GONE);
                 clueText.setText("\uD83C\uDF89 You have successfully completed the SPIT TechRace 2K16 \uD83C\uDF8A \n\nStep forth so you may receive the honor and glory that is your due \uD83C\uDF96");
             }
         }
 
-        if ((level == 1 || level == 4 || level == 11) && !pref.getBoolean(AppConstants.PREFS_INAPP, false)) {
+        if ((level == 1 || level == 3 || level == 5 || level == 8 || level == 10) && !pref.getBoolean(AppConstants.PREFS_INAPP, false)) {
             fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_lock_white_24dp));
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -312,6 +313,7 @@ public class ScannerFragment extends Fragment {
                 .withEnableAutoFocus(true)
                 .withBleepEnabled(true)
                 .withBackfacingCamera()
+                .withCenterTracker()
                 .withText("Scanning...")
                 .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
                     @Override
@@ -361,7 +363,7 @@ public class ScannerFragment extends Fragment {
 
     private void scanned(String code) {
         int level = pref.getInt(AppConstants.PREFS_LEVEL, 0);
-        if (level >= LocationContent.ITEMS.size() - 1 || ((level == 1 || level == 4 || level == 11) && !pref.getBoolean(AppConstants.PREFS_INAPP, false)))
+        if (level >= LocationContent.ITEMS.size() - 1 || ((level == 1 || level == 3 || level == 5 || level == 8 || level == 10) && !pref.getBoolean(AppConstants.PREFS_INAPP, false)))
             return;
         if (code.equals(Codes.ITEMS.get(level))) {
             Toast.makeText(getActivity(), "Success!", Toast.LENGTH_SHORT).show();

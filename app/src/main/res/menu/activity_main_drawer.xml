@@ -16,6 +16,13 @@
             android:title="@string/locations" />
     </group>
 
+    <group android:id="@+id/nav_menu_other">
+        <item
+            android:id="@+id/nav_other"
+            android:icon="@drawable/ic_event_white_24dp"
+            android:title="@string/other_events" />
+    </group>
+
     <group android:id="@+id/nav_menu_extra">
         <item
             android:id="@+id/nav_contact"

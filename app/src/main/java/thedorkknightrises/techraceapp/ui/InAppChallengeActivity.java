@@ -38,7 +38,7 @@ public class InAppChallengeActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (code.getText().toString().equals(extras.getString(AppConstants.PREFS_INAPP_A))) {
+                if (code.getText().toString().equalsIgnoreCase(extras.getString(AppConstants.PREFS_INAPP_A))) {
                     SharedPreferences pref = getSharedPreferences(AppConstants.PREFS, MODE_PRIVATE);
                     SharedPreferences.Editor edit = pref.edit();
                     edit.putBoolean(AppConstants.PREFS_INAPP, true);

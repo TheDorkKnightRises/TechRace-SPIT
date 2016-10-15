@@ -68,6 +68,9 @@
             android:name=".ui.InAppChallengeActivity"
             android:label="In-App Challenge"
             android:theme="@style/AppTheme.Dialog" />
+        <activity
+            android:name=".ui.EventsActivity"
+            android:label="@string/other_events" />
     </application>
 
 </manifest>
